@@ -23,7 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import React from 'react';
 import cx from 'classnames';
-import assign from 'object-assign';
+import assign from 'object.assign';
 import humanize from './utils/humanize';
 import serialize, {hash_serializer} from './utils/form-serialize';
 
