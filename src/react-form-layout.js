@@ -95,6 +95,8 @@ export function create(FormField, $inputPropsLookup, $fullLayout, $shortLayout, 
     	}
 
     	renderField (name) {
+            if(this.props.renderField) return this.props.renderField.apply(this, arguments);
+
     		var value = inputValueLookup(this.props.values || {}, name);
             var defaultValue = inputValueLookup(this.props.defaultValues || {}, name);
             var error = this.props.errors ? this.props.errors[name] : null;
@@ -138,14 +140,18 @@ export function create(FormField, $inputPropsLookup, $fullLayout, $shortLayout, 
         }
 
     	renderLayout () {
+            if(this.props.renderLayout) return this.props.renderLayout.apply(this, arguments);
+
     		var children = Array.prototype.slice.bind(arguments)(1);
-    		return <div key={"layout-"+this.layoutCount++}>{children}</div>;
+    		return <div key={"layout-"+this.layoutCount++} className="layout">{children}</div>;
     	}
 
     	renderSection (name) {
+            if(this.props.renderSection) return this.props.renderSection.apply(this, arguments);
+
     		var rows = Array.prototype.slice.bind(arguments)(1);
     		rows = rows.map((cols, index) => {
-    			return <div key={"columns-"+index} className="columns">{cols}</div>;
+    			return <div key={"columns-"+index} className="columns section">{cols}</div>;
     		});
 
     		return (
@@ -156,6 +162,8 @@ export function create(FormField, $inputPropsLookup, $fullLayout, $shortLayout, 
     	}
 
     	renderCol (type) {
+            if(this.props.renderCol) return this.props.renderCol.apply(this, arguments);
+
     		var fields = Array.prototype.slice.bind(arguments)(1);
     	    if(fields.length == 0) return <div className="col-sm-1" />
     		return fields.map((field, index) => {
@@ -164,6 +172,8 @@ export function create(FormField, $inputPropsLookup, $fullLayout, $shortLayout, 
     	}
 
     	renderHiddenField (name, value) {
+            if(this.props.renderHiddenField) return this.props.renderHiddenField.apply(this, arguments);
+
             var def = $inputPropsLookup(name);
 
             var refName = this.getFieldRef(name);

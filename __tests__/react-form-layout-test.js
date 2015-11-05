@@ -188,10 +188,39 @@ describe('ReactFormInput', function(){
             expect(Object.keys(form.refs).length).toBe(13);
         });
 
-        it('should generate layout of columns', function(){
-            var search = $.searchWithClass(component, 'columns');
+        it('should generate layout and section', function(){
+            var search = $.searchWithClass(component, 'layout');
+            expect(search.length).toBe(1);
+
+            search = $.searchWithClass(component, 'section');
             expect(search.length).toBe(4);
         });
+
+        it('should generate layout with custom renderLayout', function(){
+            let renderLayout = jest.genMockFn();
+            renderLayout.mockReturnValue(<div />);
+            component = $.renderIntoDocument(
+                <GeneratedForm {...componentProps} renderLayout={renderLayout}/>);
+
+            expect(renderLayout).toBeCalled();
+            var search = $.searchWithClass(component, 'layout');
+            expect(search.length).toBe(0);
+        });
+
+        it('should generate section with custom renderSection', function(){
+            let renderSection = jest.genMockFn();
+            renderSection.mockReturnValue(<div />);
+            component = $.renderIntoDocument(
+                <GeneratedForm {...componentProps} renderSection={renderSection}/>);
+
+            expect(renderSection).toBeCalled();
+            var search = $.searchWithClass(component, 'section');
+            expect(search.length).toBe(0);
+        });
+
+
+
+
 
         it('should generate inputs', function(){
             var search = $.searchWithType(component, FormInput);
