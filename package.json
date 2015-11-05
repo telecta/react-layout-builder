@@ -1,7 +1,7 @@
 {
   "name": "react-form-layout",
-  "version": "0.1.1",
-  "description": "React's high order component for layouting form+fields",
+  "version": "0.1.2",
+  "description": "A form layout generator for your React components",
   "main": "index.js",
   "scripts": {
     "test": "NODE_PATH=src:node_modules jest",
