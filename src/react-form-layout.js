@@ -240,7 +240,10 @@ export function inputValueLookup(serializedValues, inputName){
     // remove bracket
     newInputName = newInputName.replace('['+nextAttrName+']', '');
 
-    if(newInputName === '') return serializedValues[attrName][nextAttrName];
+    if(newInputName === ''){
+        return serializedValues[attrName] ? 
+            serializedValues[attrName][nextAttrName] : undefined;
+    }
     newInputName = nextAttrName + newInputName;
 
     var nestedValues = serializedValues[attrName];
