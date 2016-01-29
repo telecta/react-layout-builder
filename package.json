@@ -1,6 +1,6 @@
 {
   "name": "react-form-layout",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A form layout generator for your React components",
   "main": "lib/react-form-layout.js",
   "scripts": {
