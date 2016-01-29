@@ -165,9 +165,9 @@ export function create(FormField, $inputPropsLookup, $fullLayout, $shortLayout, 
             if(this.props.renderCol) return this.props.renderCol.apply(this, arguments);
 
     		var fields = Array.prototype.slice.bind(arguments)(1);
-    	    if(fields.length == 0) return <div className="col-sm-1" />
+    	    if(fields.length == 0) return <div className="column col-sm-1" />
     		return fields.map((field, index) => {
-    			return <div key={"col-"+index} className={"col-sm-"+type}>{this.renderField(field)}</div>
+    			return <div key={"col-"+index} className={"column col-sm-"+type}>{this.renderField(field)}</div>
     		});
     	}
 
