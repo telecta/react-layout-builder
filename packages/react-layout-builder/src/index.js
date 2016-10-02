@@ -11,10 +11,10 @@ const renderLayout = (...children) => {
 var sectionCount = 0;
 const renderSection = (name, ...rows) => {
     const renderedRows = rows.map((cols, index) => {
-        return <div key={`columns-${index}`} className="columns section">{cols}</div>;
+        return <div key={`columns-${index}`} className="columns">{cols}</div>;
     });
     return (
-        <div key={`section-${sectionCount++}`}>
+        <div key={`section-${sectionCount++}`} className="section">
             {name && name !== ''? <h5>{name}</h5> : <div />}
             {renderedRows}
         </div>);
@@ -26,7 +26,7 @@ const renderCol = (renderField, type, ...fields) => {
         return (
         <div
             key={`col-${index}`}
-            className={`column col-sm-${type}`}>
+            className={`column ${type}`}>
             {renderField(field)}
         </div>);
     });

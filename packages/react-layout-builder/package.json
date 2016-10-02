@@ -34,5 +34,20 @@
         "test": "npm run jest",
         "compile": "babel -d build/ src/",
         "prepublish": "npm run compile"
+    },
+    "jest": {
+        "automock": true,
+        "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+        "testPathDirs": [
+            "<rootDir>/__tests__"
+        ],
+        "testPathIgnorePatterns": [
+            "pending"
+        ],
+        "unmockedModulePathPatterns": [
+            "react",
+            "node_modules"
+        ],
+        "modulePathIgnorePatterns": []
     }
 }
