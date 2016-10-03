@@ -1,7 +1,7 @@
 import React from 'react';
 import invariant from 'invariant';
 
-import humanize from 'utils/humanize';
+import humanize from './utils/humanize';
 import assign from 'object-assign';
 import {builder, inputValueLookup} from 'react-layout-builder';
 
@@ -71,6 +71,7 @@ class FormWithLayout extends React.Component {
         const fieldProps = assign({}, def, {
             ref: refName,
             key: refName,
+            className: 'field',
             field: def,
             name: name,
             value: value,
