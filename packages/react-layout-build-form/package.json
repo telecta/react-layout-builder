@@ -1,6 +1,6 @@
 {
-  "name": "react-layout-builder",
-  "version": "1.0.1",
+  "name": "react-layout-build-form",
+  "version": "1.0.2",
   "description": "A helper to build layout",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
