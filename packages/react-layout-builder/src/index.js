@@ -1,7 +1,6 @@
 import React from 'react';
 import assign from 'object.assign';
-// import humanize from './utils/humanize';
-import serialize, {hash_serializer} from './utils/form-serialize';
+import serialize, {hash_serializer} from 'form-serialize';
 
 var layoutCount = 0;
 const renderLayout = (...children) => {
@@ -21,7 +20,9 @@ const renderSection = (name, ...rows) => {
 };
 
 const renderCol = (renderField, type, ...fields) => {
-    if(fields.length == 0) return <div className="column col-sm-1" />;
+    if(fields.length == 0)
+        return <div className={`column ${type}`} />;
+
     return fields.map((field, index) => {
         return (
         <div
