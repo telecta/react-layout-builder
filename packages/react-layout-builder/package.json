@@ -1,12 +1,12 @@
 {
   "name": "react-layout-builder",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Build form layout",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alvinsj/react-layout-builder"
+    "url": "https://github.com/blacktangent/react-layout-builder"
   },
   "keywords": [
     "reactjs",
@@ -17,15 +17,15 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alvinsj/react-layout-builder/issues"
+    "url": "https://github.com/blacktangent/react-layout-builder/issues"
   },
-  "homepage": "https://github.com/alvinsj/react-layout-builder",
+  "homepage": "https://github.com/blacktangent/react-layout-builder",
   "peerDependencies": {
     "react": "^15.x.x"
   },
   "dependencies": {
     "object-assign": "^4.x.x",
-    "form-input-serialize": "^1.0.1"
+    "form-input-serialize": "^1.0.3"
   },
   "devDependencies": {
     "babel": "^6.5.x",
