@@ -1,15 +1,14 @@
-jest.unmock('../src/index');
+jest.unmock('form-input-serialize');
 jest.unmock('react-layout-builder');
+jest.unmock('../src');
 
 import React from 'react';
 import {
-    inputPropsLookup
-} from 'react-layout-builder';
-
+    inputPropsLookup,
+    formInputsSerialize
+} from 'form-input-serialize';
 import {mount} from 'enzyme';
-
-import {layoutForm} from '../src/index';
-import {formInputsSerialize} from 'react-layout-builder';
+import {buildForm} from '../src';
 
 const FIELDS = {
     age: {
@@ -53,7 +52,7 @@ describe('ReactFormInput', function(){
             }
         };
 
-        GeneratedForm = layoutForm(class FormOwner extends React.Component {
+        class FormOwner extends React.Component {
             constructor (props){
                 super(props);
                 this.state = {
@@ -128,7 +127,8 @@ describe('ReactFormInput', function(){
                 createActions(values);
                 this.setState({defaultValues: values});
             }
-        });
+        }
+        GeneratedForm = buildForm(FormOwner);
         componentProps = { showAll: true };
         component = mount(<GeneratedForm {...componentProps}/>);
     });

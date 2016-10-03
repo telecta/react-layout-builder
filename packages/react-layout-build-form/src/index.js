@@ -3,7 +3,8 @@ import invariant from 'invariant';
 
 import humanize from './utils/humanize';
 import assign from 'object-assign';
-import {builder, inputValueLookup} from 'react-layout-builder';
+import {inputValueLookup} from 'form-input-serialize';
+import {layout, section, col} from 'react-layout-builder';
 
 class FormWithLayout extends React.Component {
     constructor(props, context) {
@@ -29,8 +30,8 @@ class FormWithLayout extends React.Component {
             action: props.action,
             method: props.method, onSubmit: props.onSubmit };
 
-        const formBuilder = assign({}, builder);
-        formBuilder.col = builder.col.bind(builder, this.renderField);
+        const formBuilder = {layout: layout, section: section};
+        formBuilder.col = col.bind(null, this.renderField);
 
         const children = this.props.showAll && props.renderExpandedLayout ?
             props.renderExpandedLayout(formBuilder, props)
@@ -108,5 +109,7 @@ FormWithLayout.propTypes = {
     renderExpandedLayout: React.PropTypes.func
 };
 
-export const layoutForm = (Base) =>
-    function BaseWithFormLayout(props){ return <Base form={FormWithLayout} {...props} />; };
+export const buildForm = (Base) =>
+    function BaseWithFormLayout(props){
+        return <Base form={FormWithLayout} {...props} />;
+    };
