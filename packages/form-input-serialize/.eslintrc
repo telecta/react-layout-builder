@@ -1,0 +1,54 @@
+{
+  "root": true,
+  "plugins": [
+    "react"
+  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.0"
+    }
+  },
+  "rules": {
+    "indent": 2,
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+    "quotes": [2,"single"],
+    "semi": [2, "always"],
+    "no-mixed-spaces-and-tabs": 2,
+    "quote-props": [2, "as-needed", {"numbers": true}],
+    "dot-notation": 2,
+    "no-case-declarations": 0,
+    "react/jsx-uses-vars": 2,
+    "react/prop-types": 0
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "commonjs": true
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true,
+    "experimentalObjectRestSpread": true,
+    "templateStrings": true,
+    "superInFunctions": true,
+    "arrowFunctions": true,
+    "forOf": true,
+    "destructuring": true,
+    "defaultParams": true,
+    "classes": true,
+    "blockBindings": true,
+    "binaryLiterals": true,
+  },
+  "globals": {
+    "session": true,
+    "arguments": true
+  }
+}
