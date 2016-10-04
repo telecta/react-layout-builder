@@ -110,6 +110,8 @@ FormWithLayout.propTypes = {
 };
 
 export const buildForm = (Base) =>
-    function BaseWithFormLayout(props){
-        return <Base form={FormWithLayout} {...props} />;
+    class BaseWithFormLayout extends React.Component {
+        render () {
+            return <Base form={FormWithLayout} {...this.props} />;
+        }
     };
