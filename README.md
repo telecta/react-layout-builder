@@ -2,7 +2,7 @@
 
 ## packages/
 - `react-layout-builder`
-- `react-layout-build-form`
+- `react-form-with-layout`
 - `form-input-serialize`
 
 
