@@ -22,11 +22,12 @@ export const col = (renderField, type, ...fields) => {
         return <div className={`column ${type}`} />;
 
     return fields.map((field, index) => {
+
         return (
         <div
             key={`col-${index}`}
             className={`column ${type}`}>
-            {renderField(field)}
+            {typeof field === 'string' ? renderField(field) : field}
         </div>);
     });
 };
