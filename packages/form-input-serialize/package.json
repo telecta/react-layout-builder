@@ -1,6 +1,6 @@
 {
   "name": "form-input-serialize",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "Serialize/Deserialize form input, and lookup",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
