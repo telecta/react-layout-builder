@@ -17,6 +17,7 @@ export class FormWithLayout extends React.Component {
         this._isMounted = false;
 
         this.renderField = this.renderField.bind(this);
+        this.fields = {};
     }
 
     componentDidMount () {
@@ -28,7 +29,9 @@ export class FormWithLayout extends React.Component {
 
         const formProps = {
             action: props.action,
-            method: props.method, onSubmit: props.onSubmit };
+            method: props.method,
+            onSubmit: props.onSubmit
+        };
 
         const formBuilder = {layout: layout, section: section};
         formBuilder.col = col.bind(null, this.renderField);
@@ -38,7 +41,7 @@ export class FormWithLayout extends React.Component {
             : props.renderLayout(formBuilder, props);
 
         return (
-            <form ref="form"
+            <form ref={c => this.form = c}
                 {...formProps}
 
                 className={ props.className || 'form-horizontal'}>
@@ -70,7 +73,7 @@ export class FormWithLayout extends React.Component {
         var refName = this.getFieldRef(name);
 
         const fieldProps = assign({}, def, {
-            ref: refName,
+            ref: c => {this.fields[refName] = c;},
             key: refName,
             className: 'field',
             field: def,
@@ -100,6 +103,7 @@ export class FormWithLayout extends React.Component {
         return refName;
     }
 }
+
 FormWithLayout.propTypes = {
     renderLayout: React.PropTypes.func.isRequired,
     getFieldProps: React.PropTypes.func.isRequired,

@@ -65,7 +65,7 @@ describe('ReactFormInput', function(){
             render () {
                 const Form = this.props.form;
                 return <Form {...this.props}
-                    ref='created-form'
+                    ref={c => this.createdForm = c}
                     defaultValues={this.state.defaultValues}
 
                     getFieldProps={this.getFieldProps}
@@ -120,7 +120,7 @@ describe('ReactFormInput', function(){
             }
 
             _handleSubmit (e) {
-                let form = this.refs['created-form'].refs['form'];
+                let form = this.createdForm.form;
 
                 if(e) e.preventDefault();
                 let values = formInputsSerialize(form);

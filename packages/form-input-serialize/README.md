@@ -25,4 +25,4 @@ Argument    | Type        | Example
 
 Argument    | Type        | Example
 :-----------| :-----------| :-----------
-`form`      | DOMNode      | `ReactDOM.findDOMNode(this.refs.form)`
+`form`      | DOMNode      | `ReactDOM.findDOMNode(this.form)`

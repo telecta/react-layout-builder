@@ -24,8 +24,7 @@ export const col = (renderField, type, ...fields) => {
     return fields.map((field, index) => {
 
         return (
-        <div
-            key={`col-${index}`}
+        <div key={`col-${index}`}
             className={`column ${type}`}>
             {typeof field === 'string' ? renderField(field) : field}
         </div>);
