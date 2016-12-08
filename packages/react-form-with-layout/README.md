@@ -1,14 +1,55 @@
-## react-layout-build-form
+## react-form-with-layout
 
-#### API Description
+`<FormWithLayout />` is a React component to help build the form fields and its layout.
+
+#### Usage `buildForm: function`
 ```javascript
-export class FormWithLayout extends React.Component {
-	static get 
-	
+import {FormWithLayout} from 'react-form-with-layout';
+
+class FeedbackForm extends React.Component {
 	render () {
-		return computeLayout(...);
+		const formProps = {
+		    renderLayout: this.renderLayout,
+            getFieldProps: this.getFieldProps,
+            renderField: (name, fieldProps) => <input {...fieldProps} />,
+            
+            renderButtons: null
+            renderExpandedLayout: null
+        };
+        
+	    return <FormWithLayout {...formProps} />; 
 	}
-};
+    
+    renderLayout (builder) {
+        const {layout, section} = builder;
+        const col = (type, ...children) => builder.col(`col-xs-${type}`, ...children);
+        
+        return layout(
+            section('Section 1', 
+                [col(6, 'first_name', 'last_name')], // first row: two col-xs-6
+                [col(5, 'email', 'id_no'), col(2, 'age')] // second row: two col-xs-5, one col-xs-2 
+            )
+        );
+    }
+    
+    getFieldProps (name) {
+        return {
+            first_name: { type: 'text' }, 
+            last_name: { type: 'text' },
+            email: { type: 'email' },
+            id_no: { type: 'text' },
+            age: { type: 'number' }
+        }[name];
+    }
+    
+    
+}
+export default buildForm(Base);
+
+```
+
+#### Component's propTypes
+```
 FormWithLayout.propTypes = {
 	renderLayout: React.PropTypes.func.isRequired,
 	getFieldProps: React.PropTypes.func.isRequired,
@@ -17,46 +58,4 @@ FormWithLayout.propTypes = {
 	renderButtons: React.PropTypes.func,
 	renderExpandedLayout: React.PropTypes.func
 };
-
-
-export const buildForm = (Base) => (props) =>
-    <Base form={FormWithLayout} {...props}/>;
-```
-
-#### Usage `buildForm: function`
-```javascript
-import {buildForm} from 'react-layout-build-form';
-
-class Base extends React.Component {
-	render () {
-	    const Form = this.props.form;
-		return <Form 
-			renderField={this.renderField}
-			renderLayout={this.renderLayout} /> 
-	}
-	renderField (name) {
-	    const inputProps = getFieldProps(name);
-		return <input {...inputProps} />
-	}
-	renderLayout (builder) {
-	   const {layout, section, col} = builder;
-	   const hidden = (name, value) => 
-	   		<input type='hidden' name={name} value={value} />;
-	   		
-		return layout(
-	        section('Header 1',
-	            col(6, 'name', 'dob') 
-	        ),
-	        section('Header 2',
-	            col(3, 'street', 'street2', 'city'),
-	            col(6, 'zip', 'country')
-	        ),
-	        hidden('secret', 'fish'));
-	}
-	getFieldProps (name) { 
-		/* field props for field */
-	}
-}
-export default buildForm(Base);
-
 ```
