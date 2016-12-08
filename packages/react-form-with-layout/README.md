@@ -44,7 +44,6 @@ class FeedbackForm extends React.Component {
     
     
 }
-export default buildForm(Base);
 
 ```
 
