@@ -1,3 +1,7 @@
+# form-input-serialize
+
+form-input-serialize provides helper functions for form 
+
 ### Input props lookup function
 
     inputPropsLookup(fields, fieldName)  
