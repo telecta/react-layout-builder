@@ -1,22 +1,10 @@
 ## react-form-builder
 
-### Installation
+## Installation
 
-`$ npm install --save react-form-builder` 
+    $ npm install --save react-form-builder
 
-#### API Description
-
-```javascript
-export const layout = (...children) => 
-	<Wrapper>{makeSections(children)}</Wrapper>;
-
-export const section = (header, ...children) => 
-	<Section>{header}{makeRows(children)}</Section>;
-
-export const column = (renderField, colType, ...childrenNames) =>
-	<Column>{makeColumns(colType, childrenNames)}</Column>;
-```
-#### Usage `{layout, section, col} : {function}`
+## Usage
 
 ```javascript
 import {
