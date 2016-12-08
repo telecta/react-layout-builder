@@ -2,7 +2,7 @@
 
 `<FormWithLayout />` is a React component to help build the form fields and its layout.
 
-#### Usage `buildForm: function`
+#### Usage 
 ```javascript
 import {FormWithLayout} from 'react-form-with-layout';
 
