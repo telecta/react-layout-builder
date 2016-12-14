@@ -57,6 +57,7 @@ export function inputValueLookup(serializedValues, inputName){
     return inputValueLookup(nestedValues, newInputName);
 }
 
-export function formInputsSerialize(form){
-    return serialize(form, {hash: true});
+export function formInputsSerialize(form, options){
+    var options = options || { hash: true };
+    return serialize(form, options);
 }
