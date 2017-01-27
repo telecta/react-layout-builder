@@ -1,4 +1,6 @@
-xdescribe('humanize', function() {
+jest.unmock('utils/humanize')
+
+describe('humanize', function() {
     var humanize;
 
     beforeEach(function(){
