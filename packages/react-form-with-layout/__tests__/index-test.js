@@ -78,32 +78,28 @@ describe('ReactFormInput', function(){
 
             getFullLayout (builder, props){
                 let {layout, section, col} = builder;
-                const hidden = (name, value) =>
-                    <input type='hidden' name={name} value={value} />;
 
                 return layout(
                         section('main',
                             [ col(3, 'name', 'age'), col(6, 'email') ],
                             [ col(6, 'address[0]', 'address[1]') ]
                         ),
-                        hidden('role', 'husband'),
+                        <input type='hidden' name={'role'} value={'husband'} key={'role-husband'}/>,
                         section('main',
                             [ col(3, 'name', 'age'), col(6, 'email') ],
                             [ col(6, 'address[0]', 'address[1]') ]
                         ),
-                        hidden('role', 'wife')
+                        <input type='hidden' name={'role'} value={'wife'} key={'role-wife'} />,
                     );
             }
             getShortLayout (builder, props) {
                 const {layout, section, col} = builder;
-                const hidden = (name, value) =>
-                    <input type='hidden' name={name} value={value} />;
 
                 return layout(
                         section('husband',
                             [col(6, 'name', 'email')]
                         ),
-                        hidden('role', 'husband')
+                        <input type={'hidden'} name={'role'} value={'husband'} key={'role-husband'}/>,
                     );
             }
 
