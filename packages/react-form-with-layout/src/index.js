@@ -109,6 +109,13 @@ FormWithLayout.propTypes = {
     getFieldProps: React.PropTypes.func.isRequired,
     renderField: React.PropTypes.func.isRequired,
 
+    values: React.PropTypes.object,
+    defaultValues: React.PropTypes.object,
+
+    errors: React.PropTypes.object,
+    disabled: React.PropTypes.bool,
+    className: React.PropTypes.string,
+
     renderButtons: React.PropTypes.func,
     renderExpandedLayout: React.PropTypes.func
 };
