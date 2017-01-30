@@ -8,7 +8,7 @@ A stateful component is necessary in order to keep a refernce to the rendered fo
 
 ```javascript
 import React from 'react';
-import {FormWithLayout} from 'react-form-with-layout';
+import FormWithLayout from 'react-form-with-layout';
 import {formInputsSerialize } from 'form-input-serialize';
 
 class FeedbackForm extends React.Component {
