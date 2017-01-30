@@ -7,6 +7,7 @@
 A stateful component is necessary in order to keep a refernce to the rendered form element.
 
 ```javascript
+import React from 'react';
 import {FormWithLayout} from 'react-form-with-layout';
 import {formInputsSerialize } from 'form-input-serialize';
 
@@ -14,14 +15,15 @@ class FeedbackForm extends React.Component {
     construct(props) {
         super(props);
         this.form = null;
+        this.submit = this.submit.bind(this);
     }
 
     render(props) {
         return <FormWithLayout
             ref={(c) => this.form = c}
-            renderLayout={this.renderLayout}
-            getFieldProps={this.getFieldProps}
-            renderField={(name, fieldProps) => <input type={} name={} defaultValue={}}
+            renderLayout={this.layout}
+            getFieldProps={this.fieldProps}
+            renderField={this.renderField}
             defaultValues={this.props.values} />;
     }
 
@@ -33,7 +35,7 @@ class FeedbackForm extends React.Component {
             section('Section 1',
                 [col(6, 'first_name', 'last_name')], // first row: two 6 cols
                 [col(5, 'email', 'id_no'), col(2, 'age')], // second row: two 5 cols, one 2 cols
-                <button onClick={this.submit(this.form)}>Submit</button>
+                <button onClick={this.submit}>Submit</button>
             )
         );
     }
@@ -48,24 +50,17 @@ class FeedbackForm extends React.Component {
         }[name];
     }
 
-    renderField(name, fieldProps) {
-        return <input type={} name={} defaultValue={} />;
+    renderField(name, props) {
+        return <input type={props.type} name={props.name} defaultValue={props.defaultValue} />;
     }
 
-    submit(form) {
-        this.props.onSubmit(formInputsSerialize(form));
+    submit() {
+        this.props.onSubmit(formInputsSerialize(this.form));
     }
 }
-```
 
-#### Component's propTypes
-```
-FormWithLayout.propTypes = {
-	renderLayout: React.PropTypes.func.isRequired,
-	getFieldProps: React.PropTypes.func.isRequired,
-	renderField: React.PropTypes.func.isRequired,
-		
-	renderButtons: React.PropTypes.func,
-	renderExpandedLayout: React.PropTypes.func
-};
+FeedbackForm.propTypes = {
+    values: React.PropTypes.object.isRequired,
+    onSubmit: React.PropTypes.func.isRequired
+}
 ```
