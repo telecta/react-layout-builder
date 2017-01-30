@@ -20,7 +20,7 @@ class FeedbackForm extends React.Component {
 
     render(props) {
         return <FormWithLayout
-            ref={(c) => this.form = c}
+            ref={(component) => this.form = component.form}
             renderLayout={this.layout}
             getFieldProps={this.fieldProps}
             renderField={this.renderField}
@@ -54,7 +54,8 @@ class FeedbackForm extends React.Component {
         return <input type={props.type} name={props.name} defaultValue={props.defaultValue} />;
     }
 
-    submit() {
+    submit(event) {
+        event.preventDefault();
         this.props.onSubmit(formInputsSerialize(this.form));
     }
 }
