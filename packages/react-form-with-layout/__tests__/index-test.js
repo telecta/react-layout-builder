@@ -31,29 +31,26 @@ const FIELDS = {
 
 describe('ReactFormInput', function(){
     var FormInput,
-
         componentProps,
-        createActions = jest.fn(),
+        createActions,
         component;
 
     beforeEach(function(){
+        createActions = jest.fn();
+
         FormInput = class FormField extends React.Component {
             render(){
-                const props = this.props;
                 return <input
-                    className={props.className}
-                    name={props.name}
-                    type={props.type}
-                    value={props.value|| ''} />;
+                    className={this.props.className}
+                    name={this.props.name}
+                    type={this.props.type}
+                    defaultValue={this.props.defaultValue} />;
             }
         };
 
         class FormOwner extends React.Component {
             constructor (props){
                 super(props);
-                this.state = {
-                    defaultValues: {}
-                };
                 this._handleSubmit = this._handleSubmit.bind(this);
                 this.renderButtons = this.renderButtons.bind(this);
             }
@@ -61,14 +58,13 @@ describe('ReactFormInput', function(){
             render () {
                 return <FormWithLayout {...this.props}
                     ref={c => this.createdForm = c}
-                    defaultValues={this.state.defaultValues}
 
                     getFieldProps={this.getFieldProps}
+
                     renderLayout={this.getShortLayout}
+                    renderExpandedLayout={this.getFullLayout}
 
                     renderField={(name, fieldProps) => <FormInput {...fieldProps}/>}
-
-                    renderExpandedLayout={this.getFullLayout}
                     renderButtons={this.renderButtons} />;
             }
 
@@ -120,7 +116,7 @@ describe('ReactFormInput', function(){
             }
         }
 
-        componentProps = { showAll: true }
+        componentProps = { showAll: true, defaultValues: {} }
         component = mount(<FormOwner {...componentProps} />);
     });
 
@@ -206,24 +202,15 @@ describe('ReactFormInput', function(){
         });
 
         it('should submit the form', () => {
-            var search = component.find('button');
-            expect(search.text()).toMatch('Create');
-            expect(search.length).toBe(1);
-
-            search.simulate('click');
-            expect(createActions).toBeCalled();
-            expect(createActions.mock.calls[0][0]).toEqual({role: ['husband', 'wife']});
-        });
-
-        xit('should submit the form with values', () => {
-            const name = 'garfield';
-            component.find('input[name="name"]').at(0).node.setAttribute('value', name);
             component.find('button').simulate('click');
-            expect(createActions.mock.calls[0][0]).toEqual({name: name, role: ['husband', 'wife']});
+            expect(createActions).toBeCalled();
         });
 
+        it('should submit the form with values', () => {
+            const name = 'garfield';
+            component.setProps({showAll: false, defaultValues: {name: name}});
+            component.find('button').simulate('click');
+            expect(createActions.mock.calls[0][0]).toEqual({name: name, role: 'husband'});
+        });
     });
-
-
-
 });
