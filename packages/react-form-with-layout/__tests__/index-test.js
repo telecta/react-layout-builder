@@ -3,12 +3,10 @@ jest.unmock('react-layout-builder');
 jest.unmock('../src');
 
 import React from 'react';
-import {
-    inputPropsLookup,
-    formInputsSerialize
-} from 'form-input-serialize';
+import FormWithLayout from '../src';
+import { inputPropsLookup, formInputsSerialize } from 'form-input-serialize';
+
 import {mount} from 'enzyme';
-import {buildForm} from '../src';
 
 const FIELDS = {
     age: {
@@ -33,47 +31,40 @@ const FIELDS = {
 
 describe('ReactFormInput', function(){
     var FormInput,
-
-        GeneratedForm,
-
         componentProps,
-        createActions = jest.fn(),
+        createActions,
         component;
 
     beforeEach(function(){
+        createActions = jest.fn();
+
         FormInput = class FormField extends React.Component {
             render(){
-                const props = this.props;
                 return <input
-                    className={props.className}
-                    name={props.name}
-                    type={props.type}
-                    value={props.value|| ''} />;
+                    className={this.props.className}
+                    name={this.props.name}
+                    type={this.props.type}
+                    defaultValue={this.props.defaultValue} />;
             }
         };
 
         class FormOwner extends React.Component {
             constructor (props){
                 super(props);
-                this.state = {
-                    defaultValues: {}
-                };
                 this._handleSubmit = this._handleSubmit.bind(this);
                 this.renderButtons = this.renderButtons.bind(this);
             }
 
             render () {
-                const Form = this.props.form;
-                return <Form {...this.props}
+                return <FormWithLayout {...this.props}
                     ref={c => this.createdForm = c}
-                    defaultValues={this.state.defaultValues}
 
                     getFieldProps={this.getFieldProps}
+
                     renderLayout={this.getShortLayout}
+                    renderExpandedLayout={this.getFullLayout}
 
                     renderField={(name, fieldProps) => <FormInput {...fieldProps}/>}
-
-                    renderExpandedLayout={this.getFullLayout}
                     renderButtons={this.renderButtons} />;
             }
 
@@ -83,32 +74,28 @@ describe('ReactFormInput', function(){
 
             getFullLayout (builder, props){
                 let {layout, section, col} = builder;
-                const hidden = (name, value) =>
-                    <input type='hidden' name={name} value={value} />;
 
                 return layout(
                         section('main',
                             [ col(3, 'name', 'age'), col(6, 'email') ],
                             [ col(6, 'address[0]', 'address[1]') ]
                         ),
-                        hidden('role', 'husband'),
+                        <input type='hidden' name={'role'} value={'husband'} key={'role-husband'}/>,
                         section('main',
                             [ col(3, 'name', 'age'), col(6, 'email') ],
                             [ col(6, 'address[0]', 'address[1]') ]
                         ),
-                        hidden('role', 'wife')
+                        <input type='hidden' name={'role'} value={'wife'} key={'role-wife'} />,
                     );
             }
             getShortLayout (builder, props) {
                 const {layout, section, col} = builder;
-                const hidden = (name, value) =>
-                    <input type='hidden' name={name} value={value} />;
 
                 return layout(
                         section('husband',
                             [col(6, 'name', 'email')]
                         ),
-                        hidden('role', 'husband')
+                        <input type={'hidden'} name={'role'} value={'husband'} key={'role-husband'}/>,
                     );
             }
 
@@ -128,9 +115,9 @@ describe('ReactFormInput', function(){
                 this.setState({defaultValues: values});
             }
         }
-        GeneratedForm = buildForm(FormOwner);
-        componentProps = { showAll: true };
-        component = mount(<GeneratedForm {...componentProps}/>);
+
+        componentProps = { showAll: true, defaultValues: {} }
+        component = mount(<FormOwner {...componentProps} />);
     });
 
     describe('#create', ()=> {
@@ -215,33 +202,15 @@ describe('ReactFormInput', function(){
         });
 
         it('should submit the form', () => {
-            var search = component.find('button');
-            expect(search.text()).toMatch('Create');
-            expect(search.length).toBe(1);
-
-            search.simulate('click');
+            component.find('button').simulate('click');
             expect(createActions).toBeCalled();
-            expect(createActions.mock.calls[0][0]).toEqual({role: ['husband', 'wife']});
         });
 
         it('should submit the form with values', () => {
-            const search = component.find('input');
-            const input = search.at(0).node;
-            expect(input.getAttribute('name')).toBe('name');
-
             const name = 'garfield';
-            component.find('input').at(0).node.setAttribute('value', name);
-
-            const button = component.find('button');
-            expect(button.length).toBe(1);
-
-            button.simulate('click');
-            expect(createActions).toBeCalled();
-            expect(createActions.mock.calls[0][0]).toEqual({name: name, role: ['husband', 'wife']});
+            component.setProps({showAll: false, defaultValues: {name: name}});
+            component.find('button').simulate('click');
+            expect(createActions.mock.calls[0][0]).toEqual({name: name, role: 'husband'});
         });
-
     });
-
-
-
 });

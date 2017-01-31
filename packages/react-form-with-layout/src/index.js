@@ -6,7 +6,7 @@ import assign from 'object-assign';
 import {inputValueLookup} from 'form-input-serialize';
 import {layout, section, col} from 'react-layout-builder';
 
-export class FormWithLayout extends React.Component {
+export default class FormWithLayout extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -108,6 +108,13 @@ FormWithLayout.propTypes = {
     renderLayout: React.PropTypes.func.isRequired,
     getFieldProps: React.PropTypes.func.isRequired,
     renderField: React.PropTypes.func.isRequired,
+
+    values: React.PropTypes.object,
+    defaultValues: React.PropTypes.object,
+
+    errors: React.PropTypes.object,
+    disabled: React.PropTypes.bool,
+    className: React.PropTypes.string,
 
     renderButtons: React.PropTypes.func,
     renderExpandedLayout: React.PropTypes.func

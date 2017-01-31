@@ -1,3 +1,7 @@
 {
-  "private": true
+    "private": true,
+    "dependencies": {
+        "react": "^15.4.x",
+        "react-dom": "^15.4.x"
+    }
 }
