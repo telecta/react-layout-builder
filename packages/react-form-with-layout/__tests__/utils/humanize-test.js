@@ -1,10 +1,10 @@
-jest.unmock('utils/humanize')
+jest.unmock('../../src/utils/humanize')
 
 describe('humanize', function() {
     var humanize;
 
     beforeEach(function(){
-        humanize = require('utils/humanize');
+        humanize = require('../../src/utils/humanize');
     });
 
     it('should capitalize and remove _ ', function(){
