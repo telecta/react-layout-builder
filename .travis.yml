@@ -1,5 +1,5 @@
 language: node_js
 node_js:
     - "6"
-before_install: npm install lerna -g && npm install
+before_install: npm install lerna@2.0.0-beta.28 -g && npm install
 script: lerna run test
