@@ -1,5 +1,7 @@
 # react-layout-builder
 
+![](https://img.shields.io/travis/blacktangent/react-form-builder.svg)
+
 react-layout-builder consists of tools to construct react components for form and its layout.
 
 ## packages/
