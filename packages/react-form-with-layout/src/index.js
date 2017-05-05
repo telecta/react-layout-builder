@@ -30,7 +30,7 @@ export default class FormWithLayout extends React.Component {
         const formProps = {
             action: props.action,
             method: props.method,
-            onSubmit: props.onSubmit
+            onSubmit: (e) => props.onSubmit.call(this.form, e)
         };
 
         const formBuilder = {layout: layout, section: section};
