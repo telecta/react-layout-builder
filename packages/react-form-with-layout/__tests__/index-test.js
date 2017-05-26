@@ -215,7 +215,7 @@ describe('ReactFormInput', function(){
 
         it('should have form context/this in onSubmit method', () => {
             const grabContext = jest.fn();
-            const onSubmit = jest.fn(function(e){ grabContext(this) });
+            const onSubmit = jest.fn(function(e){ grabContext(e.target) });
             component.setProps({onSubmit});
 
             const form = component.find('form');
