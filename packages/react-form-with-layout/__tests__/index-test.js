@@ -212,5 +212,18 @@ describe('ReactFormInput', function(){
             component.find('button').simulate('click');
             expect(createActions.mock.calls[0][0]).toEqual({name: name, role: 'husband'});
         });
+
+        it('should have form context/this in onSubmit method', () => {
+            const grabContext = jest.fn();
+            const onSubmit = jest.fn(function(e){ grabContext(e.target) });
+            component.setProps({onSubmit});
+
+            const form = component.find('form');
+            expect(form.length).toBe(1);
+            form.simulate('submit');
+
+            expect(onSubmit).toBeCalled();
+            expect(grabContext).toBeCalledWith(form.node);
+        });
     });
 });
