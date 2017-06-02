@@ -22,23 +22,10 @@
   "homepage": "https://github.com/blacktangent/react-layout-builder",
   "dependencies": {
     "classnames": "^2.1.3",
+    "form-input-serialize": "^1.0.12",
     "object-assign": "^4.0.1",
-    "react-layout-builder": "^1.0.12",
-    "form-input-serialize": "^1.0.12"
-  },
-  "devDependencies": {
-    "babel": "^6.5.x",
-    "babel-cli": "^6.16.x",
-    "babel-jest": "^15.x.x",
-    "babel-preset-es2015": "^6.16.x",
-    "babel-preset-react": "^6.16.x",
-    "enzyme": "^2.4.1",
-    "eslint": "^3.7.x",
-    "eslint-plugin-react": "^6.x.x",
-    "jest": "^15.1.1",
-    "lerna": "^1.1.3",
-    "react-addons-test-utils": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "object.assign": "^4.0.4",
+    "react-layout-builder": "^1.0.12"
   },
   "peerDependencies": {
     "react": "^15.0.0"
@@ -46,15 +33,20 @@
   "scripts": {
     "jest": "NODE_PATH=src:NODE_PATH jest",
     "test": "jest",
+    "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
     "compile": "babel -d build/ src/",
-    "prepublish": "npm run compile"
+    "prepublish": "babel -d build/ src/"
   },
   "jest": {
+    "bail": true,
     "automock": true,
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testPathDirs": [
+    "verbose": true,
+    "resetModules": true,
+    "transform": {".*": "<rootDir>/../../node_modules/babel-jest"},
+    "roots": [
       "<rootDir>/__tests__"
     ],
+    "testRegex": ".*-test.*",
     "testPathIgnorePatterns": [
       "pending"
     ],

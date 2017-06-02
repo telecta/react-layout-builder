@@ -85,25 +85,26 @@ describe('ReactFormInput', function(){
                             [ col(3, 'name', 'age'), col(6, 'email') ],
                             [ col(6, 'address[0]', 'address[1]') ]
                         ),
-                        <input type='hidden' name={'role'} value={'wife'} key={'role-wife'} />,
+                        <input type='hidden' name={'role'} value={'wife'} key={'role-wife'} />
                     );
             }
+
             getShortLayout (builder, props) {
                 const {layout, section, col} = builder;
 
                 return layout(
-                        section('husband',
-                            [col(6, 'name', 'email')]
-                        ),
-                        <input type={'hidden'} name={'role'} value={'husband'} key={'role-husband'}/>,
-                    );
+                    section('husband',
+                        [col(6, 'name', 'email')]
+                    ),
+                    <input type={'hidden'} name={'role'} value={'husband'} key={'role-husband'}/>
+                );
             }
 
             renderButtons (props) {
                 return (
-                <button onClick={this._handleSubmit}>
-                    Create
-                </button>);
+                    <button onClick={this._handleSubmit}>
+                        Create
+                    </button>);
             }
 
             _handleSubmit (e) {
@@ -116,7 +117,7 @@ describe('ReactFormInput', function(){
             }
         }
 
-        componentProps = { showAll: true, defaultValues: {} }
+        componentProps = { showAll: true, defaultValues: {} };
         component = mount(<FormOwner {...componentProps} />);
     });
 

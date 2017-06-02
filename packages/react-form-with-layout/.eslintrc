@@ -26,7 +26,8 @@
     "dot-notation": 2,
     "no-case-declarations": 0,
     "react/jsx-uses-vars": 2,
-    "react/prop-types": 0
+    "react/prop-types": 2,
+    "react/jsx-no-literals": 2
   },
   "env": {
     "es6": true,
@@ -49,6 +50,9 @@
   },
   "globals": {
     "session": true,
-    "arguments": true
+    "arguments": true,
+    "process": true,
+    "__dirname": true,
+    "global": true
   }
 }

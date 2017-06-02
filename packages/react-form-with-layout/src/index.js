@@ -117,5 +117,6 @@ FormWithLayout.propTypes = {
     className: React.PropTypes.string,
 
     renderButtons: React.PropTypes.func,
-    renderExpandedLayout: React.PropTypes.func
+    renderExpandedLayout: React.PropTypes.func,
+    showAll: React.PropTypes.bool
 };
