@@ -58,6 +58,7 @@ describe('ReactFormInput', function(){
             render () {
                 return <FormWithLayout {...this.props}
                     ref={c => this.createdForm = c}
+                    onSubmit={this._handleSubmit}
 
                     getFieldProps={this.getFieldProps}
 
@@ -102,18 +103,20 @@ describe('ReactFormInput', function(){
 
             renderButtons (props) {
                 return (
-                    <button onClick={this._handleSubmit}>
+                    <button>
                         Create
                     </button>);
             }
 
             _handleSubmit (e) {
-                let form = this.createdForm.form;
+                let form = e.target;
 
                 if(e) e.preventDefault();
                 let values = formInputsSerialize(form);
                 createActions(values);
                 this.setState({defaultValues: values});
+
+                if(this.props.onSubmit) this.props.onSubmit(e);
             }
         }
 
@@ -203,15 +206,27 @@ describe('ReactFormInput', function(){
         });
 
         it('should submit the form', () => {
-            component.find('button').simulate('click');
+            component.find('form').simulate('submit');
             expect(createActions).toBeCalled();
         });
 
         it('should submit the form with values', () => {
             const name = 'garfield';
             component.setProps({showAll: false, defaultValues: {name: name}});
-            component.find('button').simulate('click');
+
+            component.find('form').simulate('submit');
             expect(createActions.mock.calls[0][0]).toEqual({name: name, role: 'husband'});
+        });
+
+        it('should have form in onSubmit\'s event.target', () => {
+            const grabContext = jest.fn();
+            const onSubmit = jest.fn((e) => grabContext(e.target));
+            component.setProps({onSubmit});
+
+            component.find('form').simulate('submit');
+
+            expect(onSubmit).toBeCalled();
+            expect(grabContext).toBeCalledWith(component.find('form').node);
         });
     });
 });
