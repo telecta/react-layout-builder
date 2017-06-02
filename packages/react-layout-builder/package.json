@@ -30,16 +30,20 @@
   "scripts": {
     "jest": "NODE_PATH=src:NODE_PATH jest",
     "test": "jest",
-    "test:watch": "npm run jest -- --watch",
+    "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
     "compile": "babel -d build/ src/",
-    "prepublish": "npm run compile"
+    "prepublish": "babel -d build/ src/"
   },
   "jest": {
+    "bail": true,
     "automock": true,
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testPathDirs": [
+    "verbose": true,
+    "resetModules": true,
+    "transform": {".*": "<rootDir>/../../node_modules/babel-jest"},
+    "roots": [
       "<rootDir>/__tests__"
     ],
+    "testRegex": ".*-test.*",
     "testPathIgnorePatterns": [
       "pending"
     ],
