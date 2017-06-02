@@ -1,4 +1,4 @@
-jest.unmock('../../src/utils/humanize')
+jest.unmock('../../src/utils/humanize');
 
 describe('humanize', function() {
     var humanize;
