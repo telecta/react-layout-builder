@@ -26,6 +26,8 @@
         "global": true,
         "pending": true,
         "setImmediate": true,
-        "afterEach": true
+        "afterEach": true,
+        "beforeAll": true,
+        "spyOn": true
     }
 }
