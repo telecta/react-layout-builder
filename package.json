@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "v0.27.5",
   "dependencies": {
     "react": "^15.4.x",
     "react-dom": "^15.4.x"
@@ -30,7 +31,6 @@
     "prettier": "^1.5.3",
     "react-test-renderer": "^15.6.1"
   },
-  "version": "v0.27.5",
   "jest": {
     "bail": true,
     "automock": true,
@@ -39,14 +39,9 @@
     "transform": {
       ".*": "<rootDir>/../../node_modules/babel-jest"
     },
-    "roots": [
-      "<rootDir>/__tests__"
-    ],
+    "roots": ["<rootDir>/__tests__"],
     "testRegex": ".*-test.*",
-    "unmockedModulePathPatterns": [
-      "react",
-      "node_modules"
-    ],
+    "unmockedModulePathPatterns": ["react", "node_modules"],
     "modulePathIgnorePatterns": []
   }
 }

@@ -35,7 +35,7 @@ export function inputValueLookup(serializedValues, inputName) {
     return null;
 
   var value = serializedValues[inputName];
-  if (value) return value; // value found, easy.
+  if (typeof value !== 'undefined' && value !== null) return value; // value found, easy.
 
   // try to serialize and traverse
   var inputNameTree = hash_serializer({}, inputName, null);
