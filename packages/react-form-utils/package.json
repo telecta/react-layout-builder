@@ -1,6 +1,6 @@
 {
   "name": "react-form-utils",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Serialize/Deserialize form input, and lookup",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
@@ -29,6 +29,6 @@
     "test": "jest",
     "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
     "compile": "babel -d build/ src/",
-    "prepare": "babel -d build/ src/"
+    "prepublish": "babel -d build/ src/"
   }
 }
