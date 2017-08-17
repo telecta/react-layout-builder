@@ -1,0 +1,77 @@
+{
+  "root": true,
+  "plugins": [
+    "react",
+    "jest",
+    "import"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-app",
+    "prettier"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.0"
+    },
+    "import/resolver": {
+      "node": { "paths": ["apps/"] }
+    }
+  },
+  "rules": {
+    "comma-dangle": 0,
+    "constructor-super": "error",
+    "dot-notation": 1,
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "linebreak-style": ["error", "unix"],
+    "no-case-declarations": 0,
+    "no-console": 1,
+    "no-mixed-spaces-and-tabs": 1,
+    "object-shorthand": [1, "consistent"],
+    "prefer-const": "warn",
+    "quote-props": [2, "as-needed", { "numbers": true }],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "import/first": 0,
+    "no-unused-expressions": "error",
+    "no-unused-vars": 2,
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "commonjs": true
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true,
+    "experimentalObjectRestSpread": true,
+    "templateStrings": true,
+    "superInFunctions": true,
+    "arrowFunctions": true,
+    "forOf": true,
+    "destructuring": true,
+    "defaultParams": true,
+    "classes": true,
+    "blockBindings": true,
+    "binaryLiterals": true
+  },
+  "globals": {
+    "session": true,
+    "arguments": true,
+    "process": true,
+    "__dirname": true,
+    "global": true,
+    "spyOn": true
+  }
+}
