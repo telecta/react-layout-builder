@@ -29,13 +29,13 @@ const FIELDS = {
 };
 
 
-describe('ReactFormInput', function(){
+describe('FormWithLayout', () => {
     var FormInput,
         componentProps,
         createActions,
         component;
 
-    beforeEach(function(){
+    beforeEach(() => {
         createActions = jest.fn();
 
         FormInput = class FormField extends React.Component {
@@ -125,34 +125,30 @@ describe('ReactFormInput', function(){
     });
 
     describe('#create', ()=> {
-        it('should generate form', function(){
-            var search = component.find('form');
-            expect(search.length).toBe(1);
+        it('should generate form', () => {
+            expect(component.find('form').length).toBe(1);
         });
 
-        it('should duplicate field refs if two same fields', function(){
+        it('should duplicate field refs if two same fields', () => {
             let form =  component.find('form');
-            expect(form.find('.field-name')).toBeDefined();
-            expect(form.find('.field-name')).toBeDefined();
+            expect(form.find('[name="name"]').length).toBe(2);
         });
 
-        it('should not duplicate field refs when updated', function(){
+        it('should not duplicate field refs when updated', () => {
             let form = component.find('form');
             expect(form.find('.field').length).toBe(10);
-            component.setProps({showAll: false});
+
             component.update();
-            expect(form.find('.field').length).toBe(2);
+            expect(form.find('.field').length).toBe(10);
         });
 
-        it('should generate layout and section', function(){
-            var search = component.find('.layout');
-            expect(search.length).toBe(1);
+        it('should generate 1 layout and 2 sections', () => {
+            expect(component.find('.layout').length).toBe(1);
 
-            search = component.find('.section');
-            expect(search.length).toBe(2);
+            expect(component.find('.section').length).toBe(2);
         });
 
-        it('should generate inputs', function(){
+        it('should generate inputs', () => {
             var search = component.find(FormInput);
             expect(search.length).toBe(10);
 
@@ -194,7 +190,7 @@ describe('ReactFormInput', function(){
             expect(value(11)).toBe('wife');
         });
 
-        it('should generate lesser inputs when showAll=false', function(){
+        it('should generate lesser inputs when showAll=false', () => {
             component.setProps({showAll: false});
 
             expect(component.props().showAll).toBe(false);
@@ -218,7 +214,7 @@ describe('ReactFormInput', function(){
             expect(createActions.mock.calls[0][0]).toEqual({name: name, role: 'husband'});
         });
 
-        it('should have form in onSubmit\'s event.target', () => {
+        it('should have form as onSubmit\'s event.target', () => {
             const grabContext = jest.fn();
             const onSubmit = jest.fn((e) => grabContext(e.target));
             component.setProps({onSubmit});
