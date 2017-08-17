@@ -1,4 +1,4 @@
-# react-form-with-layout `<FormWithLayout />`
+# `<FormWithLayout />`
 
 [![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
 
@@ -8,6 +8,10 @@
 
 ```
 $ yarn add react-form-with-layout
+```
+
+```
+import FormWithLayout from 'react-form-with-layout';
 ```
 
 ### PropTypes

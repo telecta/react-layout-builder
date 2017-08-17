@@ -8,6 +8,9 @@
 $ yarn add react-layout-builder
 ```
 
+```
+import {layout, section, col} from 'react-layout-builder';
+```
 
 ### Example
 

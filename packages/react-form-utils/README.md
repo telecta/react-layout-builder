@@ -2,10 +2,13 @@
 
 [![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
 
-`react-form-utils` provides helper functions to retrive form props and form values
+`react-form-utils` provides helper functions to retrieve form props and form values
+
+```
+import {inputPropsLookup, inputValueLookup, formSerialize} from 'react-form-utils';
+```
 
 ### `inputPropsLookup(fieldsProps, fieldName) `
-
 
 Argument    | Type        | Example
 :-----------| :-----------| :-----------
