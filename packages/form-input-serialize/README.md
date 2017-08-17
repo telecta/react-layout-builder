@@ -66,10 +66,10 @@ Argument    | Type        | Example
 `values`      | `object`      | `{address: [ {zip: '55555'} ]}`
 `fieldName`   | `string`      | `address[0][zip]`
 
-####returns
+#### returns
 `any`. input value, e.g. `{type: 'text'}`
 
-####e.g.
+#### e.g.
 ```js
 const values = {
   name: 'Ali',
