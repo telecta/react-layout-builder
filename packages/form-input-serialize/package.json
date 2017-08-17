@@ -1,6 +1,6 @@
 {
   "name": "form-input-serialize",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Serialize/Deserialize form input, and lookup",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/blacktangent/react-layout-builder",
   "dependencies": {
-    "object-assign": "^4.x.x",
-    "form-serialize": "alvinsj/form-serialize#export-fn"
+    "form-serialize": "alvinsj/form-serialize#export-fn",
+    "object-assign": "^4.x.x"
   },
   "scripts": {
     "jest": "NODE_PATH=src:NODE_PATH jest",
@@ -31,5 +31,4 @@
     "compile": "babel -d build/ src/",
     "prepublish": "babel -d build/ src/"
   }
-
 }
