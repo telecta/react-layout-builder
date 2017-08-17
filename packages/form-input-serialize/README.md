@@ -1,32 +1,87 @@
 # form-input-serialize
 
-form-input-serialize provides helper functions for form 
+`form-input-serialize` provides helper functions to retrive form props and form values
 
-### Input props lookup function
+### `inputPropsLookup(fieldsProps, fieldName) ` 
 
-    inputPropsLookup(fields, fieldName)  
 
 Argument    | Type        | Example
 :-----------| :-----------| :-----------
-`fields`      | object      | `{name: {type: 'text'}, email: {type: 'email'}}`
-`fieldName`   | string      | `name`, `email[0]`, `email[1]`
+`fieldsProps`      | `object`      | `{name: {type: 'text'}, email: {type: 'email'}}`
+`fieldName`   | `string`      | `name`, `email[0]`, `email[1]`
 
+####returns
+`object`: props, e.g. `{type: 'text'}`
 
+####e.g.
+```js
+const fieldsProps = { 
+  name: { type: 'text' }, 
+  age_group: { 
+    type: 'select', 
+    size: 4, 
+    options: []
+  }
+  address: { 
+    type: 'nested', 
+    fields: {
+      street: {
+        type: 'text'
+      }
+    }
+  }  
+};
+const fieldName = 'address[0][street]';
 
-### Input values lookup function
+const props = inputPropsLookup(fieldsProps, fieldName);
+// <input name={fieldName} {...props} />
+```
 
-    inputValuesLookup(values, fieldName)  
-
-Argument    | Type        | Example
-:-----------| :-----------| :-----------
-`values`      | object      | `{address: [ {zip: '55555'} ]}`
-`fieldName`   | string      | `address[0][zip]`
-
-
-### Form input serialization function
+### `formInputsSerialize(form)`
 
     formInputsSerialize(form)  
 
 Argument    | Type        | Example
 :-----------| :-----------| :-----------
-`form`      | DOMNode      | this.refs.form
+`form`      | `DOMNode`      | `form` element
+
+####returns 
+`object`. serialized, e.g. `{type: 'text'}`
+
+####e.g.
+```js
+// <form ref={f => this.form =f}><input name="message" value="hello"/></form>
+
+const values = formInputsSerialize(this.form);
+// { message: 'hello' }
+
+```
+
+### `inputValueLookup(values, fieldName) ` 
+
+Argument    | Type        | Example
+:-----------| :-----------| :-----------
+`values`      | `object`      | `{address: [ {zip: '55555'} ]}`
+`fieldName`   | `string`      | `address[0][zip]`
+
+####returns 
+`any`. input value, e.g. `{type: 'text'}`
+
+####e.g.
+```js
+const values = { 
+  name: 'Ali', 
+  age_group: '31-40' 
+  address: {
+    0: {
+      street: '13 Calle 49a'
+  	 } 
+};
+const fieldName = 'address[0][street]';
+
+const value = inputValueLookup(values, fieldName);
+
+// <input name={fieldName} value={value} />
+```
+
+

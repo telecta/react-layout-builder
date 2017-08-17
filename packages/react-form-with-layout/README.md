@@ -1,12 +1,28 @@
-# react-form-with-layout
+# react-form-with-layout `<FormWithLayout />`
 
-`<FormWithLayout />` is a React component to help build the form fields and its layout.
+`<FormWithLayout />` is a React component to facilitate building of the form fields with a fixed layout.
 
 ## Usage
 
-A stateful component is necessary in order to keep a reference to the rendered form element.
+```
+$ yarn add react-form-with-layout
+```
 
-```javascript
+### PropTypes
+Argument    | Type        | Example
+:-----------| :-----------| :-----------
+`renderLayout `| `function(builder)`| required. renders layout
+`getFieldProps `| `function(name)`      | required. retrieves field props
+`renderField `| `function(name, props)`      | required. renders field
+`defaultValues `| `object`      | required. values of the form fields
+`onSubmit `| `function(e)`      | required. handles form submission
+`renderExpandedLayout` | `function(builder)` | similar to `renderLayout`, for layout with more fields
+`showAll` | `boolean` | hide/show fields. if it's false, use `renderLayout`. otherwise, use `renderExpandedLayout`
+`renderButtons` | `function(props)` | renders buttons at the bottom of form 
+
+### Example
+
+```jsx
 import React from 'react';
 import FormWithLayout from 'react-form-with-layout';
 import {formInputsSerialize} from 'form-input-serialize';
@@ -14,9 +30,7 @@ import {formInputsSerialize} from 'form-input-serialize';
 class FormContainer extends React.Component {
     constructor(props){
         super(props);
-
         this._handleSubmit = this._handleSubmit.bind(this);
-
         this.state = {
             values: null,
             errorMessage: null
@@ -27,7 +41,7 @@ class FormContainer extends React.Component {
         return (
             <div>
                 {this.state.errorMessage}
-                <FeedbackForm onSubmit={this._handleSubmit} />
+                <FeedbackForm onSubmit={this._handleSubmit} defaultValues={this.state.defaultValues} />
             </div>);
     }
 
@@ -48,8 +62,6 @@ class FormContainer extends React.Component {
 }
 
 const FeedbackForm = (props) => {
-    const {defaultValues, onSubmit} = props;
-
     const renderlayout = (builder) => {
         const {layout, section} = builder;
         const col = (type, ...children) => builder.col(`col-xs-${type}`, ...children);
@@ -58,7 +70,7 @@ const FeedbackForm = (props) => {
             section('Section 1',
                 [col(6, 'first_name', 'last_name')], // first row: two 6 cols
                 [col(5, 'email', 'id_no'), col(2, 'age')], // second row: two 5 cols, one 2 cols
-                <button onClick={this.submit}>Submit</button>
+                <button key="submit" onClick={this.submit}>Submit</button>
             )
         );
     };
@@ -73,16 +85,16 @@ const FeedbackForm = (props) => {
         }[name];
     };
 
-    const renderField = (name, props) => {
+    const renderField = (name, fieldProps) => {
         return <input
-              type={props.type}
-              name={props.name}
-              defaultValue={props.defaultValue} />;
+              key={name}
+              type={fieldProps.type}
+              name={fieldProps.name}
+              defaultValue={fieldProps.defaultValue} />;
     };
 
-    var form;
+    const {defaultValues, onSubmit} = props;
     const formProps = {
-        ref: (component) => (form = component.form),
         renderLayout,
         getFieldProps,
         renderField,
@@ -99,24 +111,61 @@ FeedbackForm.propTypes = {
 }
 ```
 
-### renderLayout
+### DSL for layout
+`builder` provides `{layout, section, col}` as helpers. e.g.
+
 ```
+const {layout, section} = builder;
+const col = (type, ...children) =>
+    builder.column(`col-${type}`, ...children);
+    
+return layout(
+    section('Section 1',
+        [col(6, 'first_name', 'last_name')], // first row
+        [col(5, 'email', 'id_no'), col(2, 'age')], // second row
+        <button key="submit" onClick={this.submit}>Submit</button> // regular
+    )
+);
+    
+```
+
+#### builder.`layout`
+```js
+/*
+ * @param {node} mainHeader
+ * @param {node} section
+ * @return {node}
+ * /
 layout(mainHeader, section, section, ...)
-// @param {element or string} mainHeader
-// @param {element} section
-// @return {element}
-
+// <div className="layout">{sections}</div>
+```
+#### builder.`section`
+```
+/*
+ * @param {node} sectionHeader
+ * @param {node} row
+ * @return {node}
+ * /
 section(sectionHeader, row, row, row, ...)
-// @param {element or string} sectionHeader
-// @param {element} row
-// @return {element}
+// <section className="section">{rows}</section>
+```
 
+#### builder.`col`
+```
+/*
+ * @param {string} className - the group identifier for all columns within.
+ * @param {string} fieldName - the name for lookup with `getFieldProps`+`renderField`
+ * @return {node}
+ */
+builder.col(className, fieldName, fieldName, fieldName, ...)
+
+// override the default arguments
 const col = (type, ...children) =>
     builder.column(`col-${type}`, ...children);
 
-col(count, fieldName, fieldName, fieldName, ...)
-// @param {string} count - the group identifier for all columns within.
-// @param {string} fieldName - the name for lookup with `getFieldProps`+`renderField`
-// @return {element}
-// builder.column has `renderField`+`getFieldProps` in context, to help us build elements.
+col('6', fieldName, fieldName, fieldName, ...)
+// <div className="col-6">
+//   {renderField(fieldName, getFieldProps(name))}
+// </div>
+
 ```

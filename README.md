@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
 
-react-layout-builder consists of tools to construct react components for form and its layout.
+This repo consists of libraries to construct React components for form and layout.
 
 ## packages/
 - [react-layout-builder](https://github.com/blacktangent/react-layout-builder/tree/master/packages/react-layout-builder)
