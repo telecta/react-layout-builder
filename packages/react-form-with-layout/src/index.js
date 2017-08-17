@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import invariant from 'invariant';
 
@@ -44,7 +45,7 @@ export default class FormWithLayout extends React.Component {
             <form ref={c => this.form = c}
                 {...formProps}
 
-                className={ props.className || 'form-horizontal'}>
+                className={props.className || 'form-horizontal'}>
 
                 {children}
                 {props.renderButtons ? props.renderButtons(props) : <div />}
@@ -58,23 +59,25 @@ export default class FormWithLayout extends React.Component {
         const error = props.errors ? props.errors[name] : null;
         const def = props.getFieldProps(name);
 
-        // form.field.defaultValue
+        // form.defaultValues(field).defaultValue
         var defaultValue = inputValueLookup(props.defaultValues || {}, name);
 
-        // fieldProps.value > form.field.value
-        defaultValue = def.defaultValue || defaultValue;
+        // fieldProps.value > form.defaultValues(field).defaultValue
+        defaultValue = def.defaultValue === null
+            || typeof def.defaultValue === 'undefined'
+              ? defaultValue
+              : def.defaultValue;
 
-        // form props.disabled
+        // form.props.disabled > fieldProps.disabled
         var disabled = props.disabled || def.disabled;
 
-        var label = def.label ? def.label : name;
-        label = humanize(label);
+        var label = def.label ? def.label : humanize(name);
 
         var refName = this.getFieldRef(name);
 
         const fieldProps = assign({}, def, {
             ref: c => {this.fields[refName] = c;},
-            key: refName,
+            // key: refName,
             className: 'field',
             field: def,
             name: name,
@@ -105,18 +108,18 @@ export default class FormWithLayout extends React.Component {
 }
 
 FormWithLayout.propTypes = {
-    renderLayout: React.PropTypes.func.isRequired,
-    getFieldProps: React.PropTypes.func.isRequired,
-    renderField: React.PropTypes.func.isRequired,
+    renderLayout: PropTypes.func.isRequired,
+    renderField: PropTypes.func.isRequired,
+    getFieldProps: PropTypes.func.isRequired,
 
-    values: React.PropTypes.object,
-    defaultValues: React.PropTypes.object,
+    values: PropTypes.object,
+    defaultValues: PropTypes.object,
 
-    errors: React.PropTypes.object,
-    disabled: React.PropTypes.bool,
-    className: React.PropTypes.string,
+    errors: PropTypes.object,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
 
-    renderButtons: React.PropTypes.func,
-    renderExpandedLayout: React.PropTypes.func,
-    showAll: React.PropTypes.bool
+    renderButtons: PropTypes.func,
+    renderExpandedLayout: PropTypes.func,
+    showAll: PropTypes.bool
 };
