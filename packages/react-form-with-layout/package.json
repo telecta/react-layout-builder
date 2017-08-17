@@ -47,22 +47,8 @@
   "scripts": {
     "jest": "NODE_PATH=src:NODE_PATH jest",
     "test": "jest",
+    "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
     "compile": "babel -d build/ src/",
-    "prepublish": "npm run compile"
-  },
-  "jest": {
-    "automock": true,
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testPathDirs": [
-      "<rootDir>/__tests__"
-    ],
-    "testPathIgnorePatterns": [
-      "pending"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "node_modules"
-    ],
-    "modulePathIgnorePatterns": []
+    "prepublish": "babel -d build/ src/"
   }
 }

@@ -29,13 +29,13 @@ const FIELDS = {
 };
 
 
-describe('ReactFormInput', function(){
+describe('FormWithLayout', () => {
     var FormInput,
         componentProps,
         createActions,
         component;
 
-    beforeEach(function(){
+    beforeEach(() => {
         createActions = jest.fn();
 
         FormInput = class FormField extends React.Component {
@@ -58,6 +58,7 @@ describe('ReactFormInput', function(){
             render () {
                 return <FormWithLayout {...this.props}
                     ref={c => this.createdForm = c}
+                    onSubmit={this._handleSubmit}
 
                     getFieldProps={this.getFieldProps}
 
@@ -85,70 +86,69 @@ describe('ReactFormInput', function(){
                             [ col(3, 'name', 'age'), col(6, 'email') ],
                             [ col(6, 'address[0]', 'address[1]') ]
                         ),
-                        <input type='hidden' name={'role'} value={'wife'} key={'role-wife'} />,
+                        <input type='hidden' name={'role'} value={'wife'} key={'role-wife'} />
                     );
             }
+
             getShortLayout (builder, props) {
                 const {layout, section, col} = builder;
 
                 return layout(
-                        section('husband',
-                            [col(6, 'name', 'email')]
-                        ),
-                        <input type={'hidden'} name={'role'} value={'husband'} key={'role-husband'}/>,
-                    );
+                    section('husband',
+                        [col(6, 'name', 'email')]
+                    ),
+                    <input type={'hidden'} name={'role'} value={'husband'} key={'role-husband'}/>
+                );
             }
 
             renderButtons (props) {
                 return (
-                <button onClick={this._handleSubmit}>
-                    Create
-                </button>);
+                    <button>
+                        Create
+                    </button>);
             }
 
             _handleSubmit (e) {
-                let form = this.createdForm.form;
+                let form = e.target;
 
                 if(e) e.preventDefault();
                 let values = formInputsSerialize(form);
                 createActions(values);
                 this.setState({defaultValues: values});
+
+                if(this.props.onSubmit) this.props.onSubmit(e);
             }
         }
 
-        componentProps = { showAll: true, defaultValues: {} }
+        componentProps = { showAll: true, defaultValues: {} };
         component = mount(<FormOwner {...componentProps} />);
     });
 
     describe('#create', ()=> {
-        it('should generate form', function(){
-            var search = component.find('form');
-            expect(search.length).toBe(1);
+        it('should generate form', () => {
+            expect(component.find('form').length).toBe(1);
         });
 
-        it('should duplicate field refs if two same fields', function(){
+        it('should duplicate field refs if two same fields', () => {
             let form =  component.find('form');
-            expect(form.find('.field-name')).toBeDefined();
-            expect(form.find('.field-name')).toBeDefined();
+            expect(form.find('[name="name"]').length).toBe(2);
         });
 
-        it('should not duplicate field refs when updated', function(){
+        it('should not duplicate field refs when updated', () => {
             let form = component.find('form');
             expect(form.find('.field').length).toBe(10);
-            component.setProps({showAll: false});
+
             component.update();
-            expect(form.find('.field').length).toBe(2);
+            expect(form.find('.field').length).toBe(10);
         });
 
-        it('should generate layout and section', function(){
-            var search = component.find('.layout');
-            expect(search.length).toBe(1);
+        it('should generate 1 layout and 2 sections', () => {
+            expect(component.find('.layout').length).toBe(1);
 
-            search = component.find('.section');
-            expect(search.length).toBe(2);
+            expect(component.find('.section').length).toBe(2);
         });
 
-        it('should generate inputs', function(){
+        it('should generate inputs', () => {
             var search = component.find(FormInput);
             expect(search.length).toBe(10);
 
@@ -190,7 +190,7 @@ describe('ReactFormInput', function(){
             expect(value(11)).toBe('wife');
         });
 
-        it('should generate lesser inputs when showAll=false', function(){
+        it('should generate lesser inputs when showAll=false', () => {
             component.setProps({showAll: false});
 
             expect(component.props().showAll).toBe(false);
@@ -202,14 +202,15 @@ describe('ReactFormInput', function(){
         });
 
         it('should submit the form', () => {
-            component.find('button').simulate('click');
+            component.find('form').simulate('submit');
             expect(createActions).toBeCalled();
         });
 
         it('should submit the form with values', () => {
             const name = 'garfield';
             component.setProps({showAll: false, defaultValues: {name: name}});
-            component.find('button').simulate('click');
+
+            component.find('form').simulate('submit');
             expect(createActions.mock.calls[0][0]).toEqual({name: name, role: 'husband'});
         });
 
