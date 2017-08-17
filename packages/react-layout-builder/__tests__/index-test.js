@@ -94,6 +94,6 @@ describe('builder', () => {
 
             mount(React.createElement((props) => section1, null));
             expect(console.error).not.toHaveBeenCalled();
-        })
+        });
     });
 });

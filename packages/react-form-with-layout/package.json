@@ -36,24 +36,5 @@
     "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
     "compile": "babel -d build/ src/",
     "prepublish": "babel -d build/ src/"
-  },
-  "jest": {
-    "bail": true,
-    "automock": true,
-    "verbose": true,
-    "resetModules": true,
-    "transform": {".*": "<rootDir>/../../node_modules/babel-jest"},
-    "roots": [
-      "<rootDir>/__tests__"
-    ],
-    "testRegex": ".*-test.*",
-    "testPathIgnorePatterns": [
-      "pending"
-    ],
-    "unmockedModulePathPatterns": [
-      "react",
-      "node_modules"
-    ],
-    "modulePathIgnorePatterns": []
   }
 }
