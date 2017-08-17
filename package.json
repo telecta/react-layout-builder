@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "v0.27.5",
   "dependencies": {
     "react": "^15.4.x",
     "react-dom": "^15.4.x"
@@ -7,6 +8,7 @@
   "scripts": {
     "setup": "yarn && lerna bootstrap",
     "test": "lerna run test",
+    "jest:watch": "jest --watch",
     "format": "./node_modules/.bin/prettier --single-quote --tab-width 2 --write"
   },
   "devDependencies": {
@@ -30,23 +32,15 @@
     "prettier": "^1.5.3",
     "react-test-renderer": "^15.6.1"
   },
-  "version": "v0.27.5",
   "jest": {
     "bail": true,
-    "automock": true,
     "verbose": true,
+    "automock": true,
     "resetModules": true,
     "transform": {
-      ".*": "<rootDir>/../../node_modules/babel-jest"
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
-    "roots": [
-      "<rootDir>/__tests__"
-    ],
     "testRegex": ".*-test.*",
-    "unmockedModulePathPatterns": [
-      "react",
-      "node_modules"
-    ],
-    "modulePathIgnorePatterns": []
+    "unmockedModulePathPatterns": ["react", "node_modules"]
   }
 }

@@ -69,6 +69,13 @@ describe('#inputValueLookup', () => {
     expect(inputValueLookup(values, 'age')).toBe(values.age);
   });
 
+  it('should return zero value', () => {
+    const values = {
+      zero: 0
+    };
+    expect(inputValueLookup(values, 'zero')).toBe(0);
+  });
+
   it('should lookup array values', () => {
     const values = {
       country: ['Ireland', 'Fiji'],

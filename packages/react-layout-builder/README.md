@@ -1,34 +1,88 @@
-## react-form-builder
+## react-layout-builder
+`react-layout-builder` provides helper functions to build layout like a DSL.
 
-## Installation
+```
+$ yarn add react-layout-builder
+```
 
-    $ npm install --save react-form-builder
 
-## Usage
+### Example
 
 ```javascript
+import React from 'react';
 import {
 	layout, 
 	section, 
 	col
 } from 'react-layout-builder';
 
-export default class AnotherLayout extends React.Component {
-	render () {
-	    const renderField = (name) => (props) => 
-	    	<input name={props.name} value={props.value} />;
-	    const c = col(this, renderField);
-	    const hidden = (name, value) => <input type={name} value={value} />
+const PhotoAlbum = props => {
+  const { images } = props;
+  const three60s = images.filter(i => i.type == '360');
 	
-	    return layout(
-	        section('Header 1',
-	            c('col-xs-6', 'first name', 'last name') 
-	        ),
-	        section('Header 2',
-	            [c('col-xs-6', 'street'), c('col-xs-3', 'city', 'state')], 
-	            [c('col-xs-6', 'country', 'zip')]
-	        ),
-        	hidden('secret', 'fish'))
-	}
+  const renderImage = (name) => {
+    const image = images.find(i => i.name === name);
+    return <img alt={image.title} src={image.url} />;
+  }
+  const grid = (className, ...images) => 
+    col(renderImage, className, ...images.map(i => i.name));
+	
+  return layout(
+    section('Photos',
+        new Array( Math.ceil( images.length/3 ) )
+        .map( _ => 
+          grid(
+            'grid-of-3', 
+            images.pop(), 
+            images.pop(), 
+            images.pop()
+          ) 
+        ) 
+    ),
+    section('360 Photos',
+        three60s
+        .map( p => grid('full-width', p) ) 
+    ),
+	<p key="copyright">Copyrighted by author</p>
+  );
+	
 }
 ```
+
+### Usage
+
+#### `layout`
+```js
+/*
+ * @param {node} mainHeader
+ * @param {node} section
+ * @return {node}
+ * /
+layout(mainHeader, ...sections)
+// <div className="layout">{sections}</div>
+```
+#### `section`
+```
+/*
+ * @param {node} sectionHeader
+ * @param {node} row
+ * @return {node}
+ * /
+section(sectionHeader, ...rows)
+// <section className="section">{rows}</section>
+```
+
+#### `col`
+```
+/*
+ * @param {string} className - the group identifier for all columns within.
+ * @param {string} fieldName - the name for lookup with `getFieldProps`+`renderField`
+ * @return {node}
+ */
+col(renderField, className, ...names)
+// <div className={className}>
+//  {names.map(name => renderField(name))}
+// </className>
+
+```
+
