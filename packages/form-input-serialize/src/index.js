@@ -1,63 +1,67 @@
 import assign from 'object.assign';
-import serialize, {hash_serializer} from 'form-serialize';
+import serialize, { hash_serializer } from 'form-serialize';
 
-export function inputPropsLookup (inputProps, inputName){
-    var props = inputProps[inputName];
-    if(props) return assign({label: inputName}, props); // props found, easy.
+export function inputPropsLookup(inputProps, inputName) {
+  var props = inputProps[inputName];
+  if (props) return assign({ label: inputName }, props); // props found, easy.
 
-    var inputNameTree = hash_serializer({}, inputName, null);
-    var attrName = Object.keys(inputNameTree)[0]; // inputName describes only single path
+  var inputNameTree = hash_serializer({}, inputName, null);
+  var attrName = Object.keys(inputNameTree)[0]; // inputName describes only single path
 
-    props = inputProps[attrName];
+  props = inputProps[attrName];
 
-    if( !isNaN(parseInt(attrName)) ){ // skip number
-        props = inputProps;
-    }else if(props && props.type == 'nested'){ // continue with nested props
-        props = props.fields;
-    }else if(props){
-        return props;
-    }else throw (inputName+': props cannot be found.');
+  if (!isNaN(parseInt(attrName, 10))) {
+    // skip number
+    props = inputProps;
+  } else if (props && props.type === 'nested') {
+    // continue with nested props
+    props = props.fields;
+  } else if (props) {
+    return props;
+  } else throw new Error(inputName + ': props cannot be found.');
 
-    var newInputName = inputName.replace(attrName, '');
-    var nextAttrName =  Object.keys(inputNameTree[attrName])[0];
+  var newInputName = inputName.replace(attrName, '');
+  var nextAttrName = Object.keys(inputNameTree[attrName])[0];
 
-    // remove bracket
-    newInputName = newInputName.replace('['+nextAttrName+']', '');
-    newInputName = nextAttrName + newInputName;
+  // remove bracket
+  newInputName = newInputName.replace('[' + nextAttrName + ']', '');
+  newInputName = nextAttrName + newInputName;
 
-    return inputPropsLookup(props, newInputName);
+  return inputPropsLookup(props, newInputName);
 }
 
-export function inputValueLookup(serializedValues, inputName){
-    if(!serializedValues || Object.keys(serializedValues).length == 0) return null;
+export function inputValueLookup(serializedValues, inputName) {
+  if (!serializedValues || Object.keys(serializedValues).length === 0)
+    return null;
 
-    var value = serializedValues[inputName];
-    if(value) return value; // value found, easy.
+  var value = serializedValues[inputName];
+  if (value) return value; // value found, easy.
 
-    // try to serialize and traverse
-    var inputNameTree = hash_serializer({}, inputName, null);
-    var attrName = Object.keys(inputNameTree)[0]; // inputName describes only single path
+  // try to serialize and traverse
+  var inputNameTree = hash_serializer({}, inputName, null);
+  var attrName = Object.keys(inputNameTree)[0]; // inputName describes only single path
 
-    var next = inputNameTree[attrName];
-    if(next == null) return null; // if it's already leaf, then no chance to be found.
+  var next = inputNameTree[attrName];
+  if (next == null) return null; // if it's already leaf, then no chance to be found.
 
-    var nextAttrName =  Object.keys(next)[0];
-    var newInputName = inputName.replace(attrName, '');
+  var nextAttrName = Object.keys(next)[0];
+  var newInputName = inputName.replace(attrName, '');
 
-    // remove bracket
-    newInputName = newInputName.replace('['+nextAttrName+']', '');
+  // remove bracket
+  newInputName = newInputName.replace('[' + nextAttrName + ']', '');
 
-    if(newInputName === ''){
-        return serializedValues[attrName] ?
-            serializedValues[attrName][nextAttrName] : undefined;
-    }
-    newInputName = nextAttrName + newInputName;
+  if (newInputName === '') {
+    return serializedValues[attrName]
+      ? serializedValues[attrName][nextAttrName]
+      : undefined;
+  }
+  newInputName = nextAttrName + newInputName;
 
-    var nestedValues = serializedValues[attrName];
-    return inputValueLookup(nestedValues, newInputName);
+  var nestedValues = serializedValues[attrName];
+  return inputValueLookup(nestedValues, newInputName);
 }
 
-export function formInputsSerialize(form, options){
-    var options = options || { hash: true };
-    return serialize(form, options);
+export function formInputsSerialize(form, options) {
+  options = options || { hash: true };
+  return serialize(form, options);
 }
