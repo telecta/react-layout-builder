@@ -1,8 +1,8 @@
-# form-input-serialize
+# react-form-utils
 
 [![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
 
-`form-input-serialize` provides helper functions to retrive form props and form values
+`react-form-utils` provides helper functions to retrive form props and form values
 
 ### `inputPropsLookup(fieldsProps, fieldName) `
 
@@ -39,9 +39,9 @@ const props = inputPropsLookup(fieldsProps, fieldName);
 // <input name={fieldName} {...props} />
 ```
 
-### `formInputsSerialize(form)`
+### `formSerialize(form)`
 
-    formInputsSerialize(form)  
+    formSerialize(form)  
 
 Argument    | Type        | Example
 :-----------| :-----------| :-----------
@@ -54,7 +54,7 @@ Argument    | Type        | Example
 ```js
 // <form ref={f => this.form =f}><input name="message" value="hello"/></form>
 
-const values = formInputsSerialize(this.form);
+const values = formSerialize(this.form);
 // { message: 'hello' }
 
 ```

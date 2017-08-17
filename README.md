@@ -7,7 +7,7 @@ This repo consists of libraries to construct React components for form and layou
 ## packages/
 - [react-layout-builder](https://github.com/blacktangent/react-layout-builder/tree/master/packages/react-layout-builder)
 - [react-form-with-layout](https://github.com/blacktangent/react-layout-builder/tree/master/packages/react-form-with-layout)
-- [form-input-serialize](https://github.com/blacktangent/react-layout-builder/tree/master/packages/form-input-serialize)
+- [react-form-utils](https://github.com/blacktangent/react-layout-builder/tree/master/packages/react-form-utils)
 
 ## License
 see [LICENSE](https://github.com/blacktangent/react-layout-builder/blob/master/LICENSE)

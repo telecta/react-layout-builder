@@ -4,7 +4,7 @@ import invariant from 'invariant';
 
 import humanize from './utils/humanize';
 import assign from 'object-assign';
-import { inputValueLookup } from 'form-input-serialize';
+import { inputValueLookup } from 'react-form-utils';
 import { layout, section, col } from 'react-layout-builder';
 
 export default class FormWithLayout extends React.Component {

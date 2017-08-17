@@ -1,5 +1,5 @@
 {
-  "name": "form-input-serialize",
+  "name": "react-form-utils",
   "version": "1.0.15",
   "description": "Serialize/Deserialize form input, and lookup",
   "main": "build/index.js",

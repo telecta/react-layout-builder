@@ -1,11 +1,11 @@
-jest.unmock('form-input-serialize');
+jest.unmock('react-form-utils');
 jest.unmock('react-layout-builder');
 jest.unmock('../src');
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormWithLayout from '../src';
-import { inputPropsLookup, formInputsSerialize } from 'form-input-serialize';
+import { inputPropsLookup, formSerialize } from 'react-form-utils';
 
 import { mount } from 'enzyme';
 
@@ -124,7 +124,7 @@ describe('FormWithLayout', () => {
         const form = e.target;
 
         if (e) e.preventDefault();
-        const values = formInputsSerialize(form);
+        const values = formSerialize(form);
         createActions(values);
         this.setState({ defaultValues: values });
 

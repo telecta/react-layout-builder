@@ -1,7 +1,7 @@
 import assign from 'object.assign';
 import serialize, { hash_serializer } from 'form-serialize';
 
-export function inputPropsLookup(inputProps, inputName) {
+export const inputPropsLookup = (inputProps, inputName) => {
   var props = inputProps[inputName];
   if (props) return assign({ label: inputName }, props); // props found, easy.
 
@@ -28,9 +28,9 @@ export function inputPropsLookup(inputProps, inputName) {
   newInputName = nextAttrName + newInputName;
 
   return inputPropsLookup(props, newInputName);
-}
+};
 
-export function inputValueLookup(serializedValues, inputName) {
+export const inputValueLookup = (serializedValues, inputName) => {
   if (!serializedValues || Object.keys(serializedValues).length === 0)
     return null;
 
@@ -59,9 +59,9 @@ export function inputValueLookup(serializedValues, inputName) {
 
   var nestedValues = serializedValues[attrName];
   return inputValueLookup(nestedValues, newInputName);
-}
+};
 
-export function formInputsSerialize(form, options) {
+export const formSerialize = (form, options) => {
   options = options || { hash: true };
   return serialize(form, options);
-}
+};

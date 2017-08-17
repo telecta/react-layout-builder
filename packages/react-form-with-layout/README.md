@@ -27,7 +27,7 @@ Argument    | Type        | Example
 ```jsx
 import React from 'react';
 import FormWithLayout from 'react-form-with-layout';
-import {formInputsSerialize} from 'form-input-serialize';
+import {formSerialize} from 'react-form-utils';
 
 class FormContainer extends React.Component {
     constructor(props){
@@ -50,7 +50,7 @@ class FormContainer extends React.Component {
     _handleSubmit(e){
         if(e) e.preventDefault();
 
-        const values = formInputsSerialize(e.target);
+        const values = formSerialize(e.target);
         this.setState({defaultValues: values});
 
         this.props.postToServer(
