@@ -12,10 +12,10 @@ Argument    | Type        | Example
 `fieldsProps`      | `object`      | `{name: {type: 'text'}, email: {type: 'email'}}`
 `fieldName`   | `string`      | `name`, `email[0]`, `email[1]`
 
-####returns
+#### returns
 `object`: props, e.g. `{type: 'text'}`
 
-####e.g.
+#### e.g.
 ```js
 const fieldsProps = {
   name: { type: 'text' },
@@ -47,10 +47,10 @@ Argument    | Type        | Example
 :-----------| :-----------| :-----------
 `form`      | `DOMNode`      | `form` element
 
-####returns
+#### returns
 `object`. serialized, e.g. `{type: 'text'}`
 
-####e.g.
+#### e.g.
 ```js
 // <form ref={f => this.form =f}><input name="message" value="hello"/></form>
 
@@ -66,10 +66,10 @@ Argument    | Type        | Example
 `values`      | `object`      | `{address: [ {zip: '55555'} ]}`
 `fieldName`   | `string`      | `address[0][zip]`
 
-####returns
+#### returns
 `any`. input value, e.g. `{type: 'text'}`
 
-####e.g.
+#### e.g.
 ```js
 const values = {
   name: 'Ali',

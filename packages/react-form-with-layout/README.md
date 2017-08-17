@@ -116,7 +116,7 @@ FeedbackForm.propTypes = {
 ### DSL for layout
 `builder` provides `{layout, section, col}` as helpers. e.g.
 
-```
+```jsx
 const {layout, section} = builder;
 const col = (type, ...children) =>
     builder.column(`col-${type}`, ...children);
@@ -132,28 +132,28 @@ return layout(
 ```
 
 #### builder.`layout`
-```js
+```jsx
 /*
  * @param {node} mainHeader
  * @param {node} section
  * @return {node}
- * /
+ */
 layout(mainHeader, section, section, ...)
 // <div className="layout">{sections}</div>
 ```
 #### builder.`section`
-```
+```jsx
 /*
  * @param {node} sectionHeader
  * @param {node} row
  * @return {node}
- * /
+ */
 section(sectionHeader, row, row, row, ...)
 // <section className="section">{rows}</section>
 ```
 
 #### builder.`col`
-```
+```jsx
 /*
  * @param {string} className - the group identifier for all columns within.
  * @param {string} fieldName - the name for lookup with `getFieldProps`+`renderField`

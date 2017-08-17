@@ -11,7 +11,7 @@ $ yarn add react-layout-builder
 
 ### Example
 
-```javascript
+```jsx
 import React from 'react';
 import {
   layout,
@@ -55,28 +55,28 @@ const PhotoAlbum = props => {
 ### Usage
 
 #### `layout`
-```js
+```jsx
 /*
  * @param {node} mainHeader
  * @param {node} section
  * @return {node}
- * /
+ */
 layout(mainHeader, ...sections)
 // <div className="layout">{sections}</div>
 ```
 #### `section`
-```
+```jsx
 /*
  * @param {node} sectionHeader
  * @param {node} row
  * @return {node}
- * /
+ */
 section(sectionHeader, ...rows)
 // <section className="section">{rows}</section>
 ```
 
 #### `col`
-```
+```jsx
 /*
  * @param {string} className - the group identifier for all columns within.
  * @param {string} fieldName - the name for lookup with `getFieldProps`+`renderField`
