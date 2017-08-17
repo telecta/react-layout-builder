@@ -1,5 +1,7 @@
 # react-form-with-layout `<FormWithLayout />`
 
+[![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
+
 `<FormWithLayout />` is a React component to facilitate building of the form fields with a fixed layout.
 
 ## Usage
@@ -18,7 +20,7 @@ Argument    | Type        | Example
 `onSubmit `| `function(e)`      | required. handles form submission
 `renderExpandedLayout` | `function(builder)` | similar to `renderLayout`, for layout with more fields
 `showAll` | `boolean` | hide/show fields. if it's false, use `renderLayout`. otherwise, use `renderExpandedLayout`
-`renderButtons` | `function(props)` | renders buttons at the bottom of form 
+`renderButtons` | `function(props)` | renders buttons at the bottom of form
 
 ### Example
 
@@ -118,7 +120,7 @@ FeedbackForm.propTypes = {
 const {layout, section} = builder;
 const col = (type, ...children) =>
     builder.column(`col-${type}`, ...children);
-    
+
 return layout(
     section('Section 1',
         [col(6, 'first_name', 'last_name')], // first row
@@ -126,7 +128,7 @@ return layout(
         <button key="submit" onClick={this.submit}>Submit</button> // regular
     )
 );
-    
+
 ```
 
 #### builder.`layout`

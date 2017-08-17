@@ -1,4 +1,7 @@
 ## react-layout-builder
+
+[![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
+
 `react-layout-builder` provides helper functions to build layout like a DSL.
 
 ```
@@ -11,41 +14,41 @@ $ yarn add react-layout-builder
 ```javascript
 import React from 'react';
 import {
-	layout, 
-	section, 
-	col
+  layout,
+  section,
+  col
 } from 'react-layout-builder';
 
 const PhotoAlbum = props => {
   const { images } = props;
   const three60s = images.filter(i => i.type == '360');
-	
+
   const renderImage = (name) => {
     const image = images.find(i => i.name === name);
     return <img alt={image.title} src={image.url} />;
   }
-  const grid = (className, ...images) => 
+  const grid = (className, ...images) =>
     col(renderImage, className, ...images.map(i => i.name));
-	
+
   return layout(
     section('Photos',
         new Array( Math.ceil( images.length/3 ) )
-        .map( _ => 
+        .map( _ =>
           grid(
-            'grid-of-3', 
-            images.pop(), 
-            images.pop(), 
+            'grid-of-3',
+            images.pop(),
+            images.pop(),
             images.pop()
-          ) 
-        ) 
+          )
+        )
     ),
     section('360 Photos',
         three60s
-        .map( p => grid('full-width', p) ) 
+        .map( p => grid('full-width', p) )
     ),
-	<p key="copyright">Copyrighted by author</p>
+  <p key="copyright">Copyrighted by author</p>
   );
-	
+
 }
 ```
 
@@ -85,4 +88,3 @@ col(renderField, className, ...names)
 // </className>
 
 ```
-

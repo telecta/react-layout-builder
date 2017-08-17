@@ -1,8 +1,10 @@
 # form-input-serialize
 
+[![Build Status](https://travis-ci.org/blacktangent/react-layout-builder.svg?branch=master)](https://travis-ci.org/blacktangent/react-layout-builder)
+
 `form-input-serialize` provides helper functions to retrive form props and form values
 
-### `inputPropsLookup(fieldsProps, fieldName) ` 
+### `inputPropsLookup(fieldsProps, fieldName) `
 
 
 Argument    | Type        | Example
@@ -15,15 +17,15 @@ Argument    | Type        | Example
 
 ####e.g.
 ```js
-const fieldsProps = { 
-  name: { type: 'text' }, 
-  age_group: { 
-    type: 'select', 
-    size: 4, 
+const fieldsProps = {
+  name: { type: 'text' },
+  age_group: {
+    type: 'select',
+    size: 4,
     options: []
   }
-  address: { 
-    type: 'nested', 
+  address: {
+    type: 'nested',
     fields: {
       street: {
         type: 'text'
@@ -45,7 +47,7 @@ Argument    | Type        | Example
 :-----------| :-----------| :-----------
 `form`      | `DOMNode`      | `form` element
 
-####returns 
+####returns
 `object`. serialized, e.g. `{type: 'text'}`
 
 ####e.g.
@@ -57,25 +59,25 @@ const values = formInputsSerialize(this.form);
 
 ```
 
-### `inputValueLookup(values, fieldName) ` 
+### `inputValueLookup(values, fieldName) `
 
 Argument    | Type        | Example
 :-----------| :-----------| :-----------
 `values`      | `object`      | `{address: [ {zip: '55555'} ]}`
 `fieldName`   | `string`      | `address[0][zip]`
 
-####returns 
+####returns
 `any`. input value, e.g. `{type: 'text'}`
 
 ####e.g.
 ```js
-const values = { 
-  name: 'Ali', 
-  age_group: '31-40' 
+const values = {
+  name: 'Ali',
+  age_group: '31-40'
   address: {
     0: {
       street: '13 Calle 49a'
-  	 } 
+     }
 };
 const fieldName = 'address[0][street]';
 
@@ -83,5 +85,3 @@ const value = inputValueLookup(values, fieldName);
 
 // <input name={fieldName} value={value} />
 ```
-
-
