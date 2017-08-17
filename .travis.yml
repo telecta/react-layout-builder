@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '6.11.x'
+- '6.11'
 before_install: npm install lerna@2.0.0 -g
 install: lerna bootstrap
 script: lerna run test
