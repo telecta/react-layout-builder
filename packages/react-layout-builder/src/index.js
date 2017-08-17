@@ -30,12 +30,12 @@ export const section = (name, ...rows) => {
   );
 };
 
-export const col = (renderField, type, ...fields) => {
-  if (fields.length === 0) return <div className={`column ${type}`} />;
+export const col = (renderField, className, ...fields) => {
+  if (fields.length === 0) return <div className={`column ${className}`} />;
 
   return fields.map((field, index) => {
     return (
-      <div key={`col-${index}`} className={`column ${type}`}>
+      <div key={`col-${index}`} className={`column ${className}`}>
         {typeof field === 'string' ? renderField(field) : field}
       </div>
     );
