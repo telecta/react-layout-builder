@@ -4,30 +4,53 @@
 
 ## Usage
 
-A stateful component is necessary in order to keep a refernce to the rendered form element.
+A stateful component is necessary in order to keep a reference to the rendered form element.
 
 ```javascript
 import React from 'react';
 import FormWithLayout from 'react-form-with-layout';
-import {formInputsSerialize } from 'form-input-serialize';
+import {formInputsSerialize} from 'form-input-serialize';
 
-class FeedbackForm extends React.Component {
-    construct(props) {
+class FormContainer extends React.Component {
+    constructor(props){
         super(props);
-        this.form = null;
-        this.submit = this.submit.bind(this);
+
+        this._handleSubmit = this._handleSubmit.bind(this);
+
+        this.state = {
+            values: null,
+            errorMessage: null
+        };
     }
 
-    render(props) {
-        return <FormWithLayout
-            ref={(component) => this.form = component.form}
-            renderLayout={this.layout}
-            getFieldProps={this.fieldProps}
-            renderField={this.renderField}
-            defaultValues={this.props.values} />;
+    render(){
+        return (
+            <div>
+                {this.state.errorMessage}
+                <FeedbackForm onSubmit={this._handleSubmit} />
+            </div>);
     }
 
-    layout(builder) {
+    _handleSubmit(e){
+        if(e) e.preventDefault();
+
+        const values = formInputsSerialize(e.target);
+        this.setState({defaultValues: values});
+
+        this.props.postToServer(
+            values
+        ).then((res) => {
+            // navigateToSummary();
+        }).catch((err) => {
+            this.setState({errorMessage: err.message});
+        }});
+    }
+}
+
+const FeedbackForm = (props) => {
+    const {defaultValues, onSubmit} = props;
+
+    const renderlayout = (builder) => {
         const {layout, section} = builder;
         const col = (type, ...children) => builder.col(`col-xs-${type}`, ...children);
 
@@ -38,9 +61,9 @@ class FeedbackForm extends React.Component {
                 <button onClick={this.submit}>Submit</button>
             )
         );
-    }
+    };
 
-    fieldProps(name) {
+    const getFieldProps = (name) => {
         return {
             first_name: { type: 'text' },
             last_name: { type: 'text' },
@@ -48,20 +71,52 @@ class FeedbackForm extends React.Component {
             id_no: { type: 'text' },
             age: { type: 'number' }
         }[name];
-    }
+    };
 
-    renderField(name, props) {
-        return <input type={props.type} name={props.name} defaultValue={props.defaultValue} />;
-    }
+    const renderField = (name, props) => {
+        return <input
+              type={props.type}
+              name={props.name}
+              defaultValue={props.defaultValue} />;
+    };
 
-    submit(event) {
-        event.preventDefault();
-        this.props.onSubmit(formInputsSerialize(this.form));
-    }
+    var form;
+    const formProps = {
+        ref: (component) => (form = component.form),
+        renderLayout,
+        getFieldProps,
+        renderField,
+        defaultValues,
+        onSubmit
+    };
+
+    return <FormWithLayout {...formProps} />;
 }
 
 FeedbackForm.propTypes = {
-    values: React.PropTypes.object.isRequired,
-    onSubmit: React.PropTypes.func.isRequired
+    defaultValues: PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired
 }
+```
+
+### renderLayout
+```
+layout(mainHeader, section, section, ...)
+// @param {element or string} mainHeader
+// @param {element} section
+// @return {element}
+
+section(sectionHeader, row, row, row, ...)
+// @param {element or string} sectionHeader
+// @param {element} row
+// @return {element}
+
+const col = (type, ...children) =>
+    builder.column(`col-${type}`, ...children);
+
+col(count, fieldName, fieldName, fieldName, ...)
+// @param {string} count - the group identifier for all columns within.
+// @param {string} fieldName - the name for lookup with `getFieldProps`+`renderField`
+// @return {element}
+// builder.column has `renderField`+`getFieldProps` in context, to help us build elements.
 ```
