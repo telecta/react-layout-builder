@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - '6.11'
-before_install: npm install lerna@2.0.0 -g
+before_install: yarn global add lerna@2.0.0 babel
 install: lerna bootstrap
 script: lerna run test
 dist: xenial
