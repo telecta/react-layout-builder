@@ -1,12 +1,14 @@
 language: node_js
 node_js:
-- '6.11'
+  - '6.11'
 before_install:
-- yarn global add lerna@2.0.0 babel-cli
-- yarn install
-install: lerna bootstrap
+  - yarn global add lerna@2.0.0
+install:
+  - yarn install
+  - lerna bootstrap
+cache:
+  yarn: true
 script: lerna run test
-dist: xenial
 notifications:
   slack:
     secure: DZpxkdZH04+8QVO/BXWHeeWKb3LswmbESEsPGQkFvwjYPVs3K3lTyBcr6OouYaxhPJ1uwfO9BKLL+CkYNp/loEukzqOg/OUee+Y5UZ4rIue5/XckuiqTFZiDCjWqcP5vBvOmRsvLE6mgoc6TNVSqMQHAkOE9nLPtCUEo4gtMJZooBrg5rwWDB5rzTtIpvXcvFK3nMiX8SZAReq6l4IePUrUFpgL2dF/ifnsZ7jpy9CxnvrfCEBLSQIpA0Q5O8FD8ylMNc7WqTxxrXQCZG2n0GyN4c697K609lrOXGtKTdhlEwpV4PHULUpcmjHvylBkfNCNgXcnXpBlVApR9wOB7TFP+6IlH6nzlaXNDkSlSkiwz4tQ8HldEG0bUsXxXjHWS09oUlQMw6FtnmerVz6ocTUqFiZISecFz+RiL9+DbsnMHVsili6xbO5+36ZGYj5yB+1jCyS/BUXIHzjVAJ4ve9Mf21k2aIz3+zuGww8ys8vNfV2wK/+7264itmgNUuCostd70IY3/pncwuDHQubXyOd5yIx4CadTGlVagavhQHRoQEXbSLSD0zOIbJEQFC8qA6ZFGIz8u3yV0+8SoWb0+qCNDm4MlaStj9aVCCKEEdE/xDPv6IHBETjqgRQOYUWynnm+LZK3nX0K7NcFta+axeLw/W43lIJokn0tG20FExlY=
