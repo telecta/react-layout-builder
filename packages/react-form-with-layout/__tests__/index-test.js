@@ -32,12 +32,18 @@ const FIELDS = {
 const FormInput = props => {
   return (
     <input
-      className={this.props.className}
-      name={this.props.name}
-      type={this.props.type}
-      defaultValue={this.props.defaultValue}
+      className={props.className}
+      name={props.name}
+      type={props.type}
+      defaultValue={props.defaultValue}
     />
   );
+};
+FormInput.propTypes = {
+  name: PropTypes.string,
+  type: PropTypes.string,
+  className: PropTypes.string,
+  defaultValue: PropTypes.string
 };
 
 describe('FormWithLayout', () => {
