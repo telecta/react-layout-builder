@@ -1,8 +1,9 @@
 language: node_js
 node_js:
 - '6'
-before_install: yarn setup
-script: yarn test
+before_install: npm install lerna@2.0.0-beta.28 -g
+install: lerna bootstrap
+script: lerna run test
 dist: xenial
 notifications:
   slack:
