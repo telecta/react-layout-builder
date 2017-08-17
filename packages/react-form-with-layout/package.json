@@ -1,6 +1,6 @@
 {
   "name": "react-form-with-layout",
-  "version": "1.1.1",
+  "version": "1.1.6",
   "description": "A helper to build form layout",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
@@ -24,8 +24,8 @@
     "classnames": "^2.1.3",
     "object-assign": "^4.0.1",
     "object.assign": "^4.0.4",
-    "react-form-utils": "^1.1.1",
-    "react-layout-builder": "^1.1.1"
+    "react-form-utils": "^1.1.6",
+    "react-layout-builder": "^1.1.6"
   },
   "devDependencies": {
     "babel": "^6.5.x",
@@ -49,6 +49,6 @@
     "test": "jest",
     "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
     "compile": "babel -d build/ src/",
-    "prepublish": "babel -d build/ src/"
+    "prepare": "babel -d build/ src/"
   }
 }
