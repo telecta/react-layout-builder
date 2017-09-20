@@ -1,16 +1,14 @@
 import React from 'react';
 
-var layoutCount = 0;
 export const layout = (...children) => {
   return (
-    <div key={`layout-${layoutCount++}`} className="layout">
+    <div className="layout">
       {children}
     </div>
   );
 };
 
-var sectionCount = 0;
-export const section = (name, ...rows) => {
+export const section = (key, name, ...rows) => {
   const renderedRows = rows.map((cols, index) => {
     return (
       <div key={`columns-${index}`} className="columns">
@@ -19,7 +17,7 @@ export const section = (name, ...rows) => {
     );
   });
   return (
-    <div key={`section-${sectionCount++}`} className="section">
+    <div key={key} className="section">
       {name && name !== ''
         ? <h5>
             {name}
