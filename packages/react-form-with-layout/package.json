@@ -1,6 +1,6 @@
 {
   "name": "react-form-with-layout",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "A helper to build form layout",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
