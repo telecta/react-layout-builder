@@ -32,7 +32,7 @@ export const inputPropsLookup = (inputProps, inputName) => {
 
 export const inputValueLookup = (serializedValues, inputName) => {
   if (!serializedValues || Object.keys(serializedValues).length === 0)
-    return null;
+    return undefined;
 
   var value = serializedValues[inputName];
   if (typeof value !== 'undefined' && value !== null) return value; // value found, easy.
@@ -42,7 +42,7 @@ export const inputValueLookup = (serializedValues, inputName) => {
   var attrName = Object.keys(inputNameTree)[0]; // inputName describes only single path
 
   var next = inputNameTree[attrName];
-  if (next == null) return null; // if it's already leaf, then no chance to be found.
+  if (next == null) return undefined; // if it's already leaf, then no chance to be found.
 
   var nextAttrName = Object.keys(next)[0];
   var newInputName = inputName.replace(attrName, '');
