@@ -60,7 +60,9 @@ export default class FormWithLayout extends React.Component {
     const formProps = this.props;
     const fieldProps = formProps.getFieldProps(name);
 
-    const label = fieldProps.label ? fieldProps.label : humanize(name);
+    const label = typeof fieldProps.label !== 'undefined'
+      ? fieldProps.label
+      : humanize(name);
     const refName = this.getFieldRef(name);
 
     // formProps.disabled > fieldProps.disabled
@@ -79,16 +81,14 @@ export default class FormWithLayout extends React.Component {
         : inputValueLookup(formProps.values || {}, name);
 
     const inputProps = assign({}, fieldProps, {
-      ref: c => {
-        this.fields[refName] = c;
-      },
+      ref: c => this.fields[refName] = c,
       className: 'field',
       name: name,
       value: value,
       label: label,
       disabled: disabled,
 
-      defaultValue: value ? undefined : defaultValue,
+      defaultValue: typeof value !== 'undefined' ? undefined : defaultValue,
       formProps: formProps
     });
 
