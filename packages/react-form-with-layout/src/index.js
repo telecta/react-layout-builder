@@ -57,46 +57,44 @@ export default class FormWithLayout extends React.Component {
   }
 
   renderField(name) {
-    const props = this.props;
+    const formProps = this.props;
+    const fieldProps = formProps.getFieldProps(name);
 
-    const value = inputValueLookup(props.values || {}, name);
-    const error = props.errors ? props.errors[name] : null;
-    const def = props.getFieldProps(name);
+    const label = fieldProps.label ? fieldProps.label : humanize(name);
+    const refName = this.getFieldRef(name);
 
-    // form.defaultValues(field).defaultValue
-    var defaultValue = inputValueLookup(props.defaultValues || {}, name);
+    // formProps.disabled > fieldProps.disabled
+    const disabled = typeof formProps.disabled !== 'undefined'
+      ? formProps.disabled
+      : fieldProps.disabled;
 
-    // fieldProps.value > form.defaultValues(field).defaultValue
-    defaultValue =
-      def.defaultValue === null || typeof def.defaultValue === 'undefined'
-        ? defaultValue
-        : def.defaultValue;
+    // fieldProps.defaultValue > formProps.defaultValues(field).defaultValue
+    const defaultValue = typeof fieldProps.defaultValue !== 'undefined'
+        ? fieldProps.defaultValue
+        : inputValueLookup(formProps.defaultValues || {}, name);
 
-    // form.props.disabled > fieldProps.disabled
-    var disabled = props.disabled || def.disabled;
+    // fieldProps.value > formProps.values(field).value
+    const value = typeof fieldProps.value !== 'undefined'
+        ? fieldProps.value
+        : inputValueLookup(formProps.values || {}, name);
 
-    var label = def.label ? def.label : humanize(name);
-
-    var refName = this.getFieldRef(name);
-
-    const fieldProps = assign({}, def, {
+    const inputProps = assign({}, fieldProps, {
       ref: c => {
         this.fields[refName] = c;
       },
-      // key: refName,
       className: 'field',
-      field: def,
       name: name,
       value: value,
-      defaultValue: defaultValue,
       label: label,
-      error: error,
-      disabled: disabled
+      disabled: disabled,
+
+      defaultValue: value ? undefined : defaultValue,
+      formProps: formProps
     });
 
-    return def.input
-      ? React.createElement(def.input, fieldProps)
-      : props.renderField(name, fieldProps);
+    return fieldProps.input
+      ? React.createElement(fieldProps.input, inputProps)
+      : formProps.renderField(name, inputProps);
   }
 
   /** contextual features */
