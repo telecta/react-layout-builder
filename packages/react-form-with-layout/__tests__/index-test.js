@@ -84,6 +84,7 @@ describe('FormWithLayout', () => {
         return layout(
           section(
             'main',
+            'main',
             [col(3, 'name', 'age'), col(6, 'email')],
             [col(6, 'address[0]', 'address[1]')]
           ),
@@ -94,6 +95,7 @@ describe('FormWithLayout', () => {
             key={'role-husband'}
           />,
           section(
+            'second',
             'main',
             [col(3, 'name', 'age'), col(6, 'email')],
             [col(6, 'address[0]', 'address[1]')]
@@ -106,7 +108,7 @@ describe('FormWithLayout', () => {
         const { layout, section, col } = builder;
 
         return layout(
-          section('husband', [col(6, 'name', 'email')]),
+          section('husband', 'husband', [col(6, 'name', 'email')]),
           <input
             type={'hidden'}
             name={'role'}
