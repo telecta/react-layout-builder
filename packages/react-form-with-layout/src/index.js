@@ -65,10 +65,10 @@ export default class FormWithLayout extends React.Component {
       : humanize(name);
     const refName = this.getFieldRef(name);
 
-    // formProps.disabled > fieldProps.disabled
-    const disabled = typeof formProps.disabled !== 'undefined'
-      ? formProps.disabled
-      : fieldProps.disabled;
+    // fieldProps.disabled > formProps.disabled >
+    const disabled = typeof fieldProps.disabled !== 'undefined'
+      ? fieldProps.disabled
+      : formProps.disabled;
 
     // fieldProps.defaultValue > formProps.defaultValues(field).defaultValue
     const defaultValue = typeof fieldProps.defaultValue !== 'undefined'
