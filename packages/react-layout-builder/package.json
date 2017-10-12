@@ -1,6 +1,6 @@
 {
   "name": "react-layout-builder",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "description": "Build form layout",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "object-assign": "^4.x.x",
-    "react-form-utils": "^2.0.0-alpha.4"
+    "react-form-utils": "^2.0.0-alpha.5"
   },
   "scripts": {
     "jest": "NODE_PATH=src:NODE_PATH jest",

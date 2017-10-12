@@ -1,6 +1,6 @@
 {
   "name": "react-form-utils",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "description": "Serialize/Deserialize form input, and lookup",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
