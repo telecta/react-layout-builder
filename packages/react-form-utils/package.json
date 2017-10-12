@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/blacktangent/react-layout-builder",
   "dependencies": {
-    "form-serialize": "alvinsj/form-serialize#export-fn",
+    "form-serialize": "blacktangent/form-serialize#export-fn",
     "object-assign": "^4.x.x"
   },
   "scripts": {
