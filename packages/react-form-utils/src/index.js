@@ -19,7 +19,6 @@ export const inputPropsLookup = (inputProps, inputName) => {
   } else if (props) {
     return props;
   } else {
-    console.error(inputName + ': props cannot be found.');
     return undefined;
   }
 
