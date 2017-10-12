@@ -18,7 +18,10 @@ export const inputPropsLookup = (inputProps, inputName) => {
     props = props.fields;
   } else if (props) {
     return props;
-  } else throw new Error(inputName + ': props cannot be found.');
+  } else {
+    console.error(inputName + ': props cannot be found.');
+    return undefined;
+  }
 
   var newInputName = inputName.replace(attrName, '');
   var nextAttrName = Object.keys(inputNameTree[attrName])[0];
