@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-form-serialize@blacktangent/form-serialize#export-fn:
-  version "0.7.2.alpha.1"
-  resolved "https://codeload.github.com/blacktangent/form-serialize/tar.gz/8e5f6342ba357e1afd5599e18977924c9a7458f8"
+"@alvinsj/form-serialize@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@alvinsj/form-serialize/-/form-serialize-0.7.1.tgz#73280c4c4b6971ba17c0913854747d59e5ccb165"
 
 object-assign@^4.x.x:
   version "4.1.1"
