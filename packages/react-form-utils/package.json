@@ -1,6 +1,6 @@
 {
   "name": "react-form-utils",
-  "version": "2.0.0-alpha.8",
+  "version": "2.0.0-alpha.9",
   "description": "Serialize/Deserialize form input, and lookup",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/blacktangent/react-layout-builder",
   "dependencies": {
-    "@alvinsj/form-serialize": "^0.7.1",
+    "@alvinsj/form-serialize": "^0.7.2-alpha.1",
     "object-assign": "^4.x.x"
   },
   "scripts": {
