@@ -1,5 +1,5 @@
 import assign from 'object.assign';
-import serialize, { hash_serializer } from 'form-serialize';
+import serialize, { hash_serializer } from '@alvinsj/form-serialize';
 
 export const inputPropsLookup = (inputProps, inputName) => {
   var props = inputProps[inputName];
