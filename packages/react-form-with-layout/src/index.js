@@ -82,7 +82,6 @@ export default class FormWithLayout extends React.Component {
 
     const inputProps = assign({}, fieldProps, {
       ref: c => this.fields[refName] = c,
-      className: 'field',
       name: name,
       value: value,
       label: label,
