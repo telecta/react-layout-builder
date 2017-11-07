@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@alvinsj/form-serialize@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@alvinsj/form-serialize/-/form-serialize-0.7.1.tgz#73280c4c4b6971ba17c0913854747d59e5ccb165"
+"@alvinsj/form-serialize@^0.7.2-alpha.1":
+  version "0.7.2-alpha.1"
+  resolved "https://registry.yarnpkg.com/@alvinsj/form-serialize/-/form-serialize-0.7.2-alpha.1.tgz#66a774f38139d067dad498d4e5a48eadf6592afb"
 
 object-assign@^4.x.x:
   version "4.1.1"
