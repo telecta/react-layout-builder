@@ -21,17 +21,17 @@
   },
   "homepage": "https://github.com/blacktangent/react-layout-builder",
   "peerDependencies": {
-    "react": "^15.x.x"
+    "react": "^16.3.x"
   },
   "dependencies": {
     "object-assign": "^4.x.x",
     "react-form-utils": "^1.2.0"
   },
   "scripts": {
-    "jest": "NODE_PATH=src:NODE_PATH jest",
+    "jest": "./../../node_modules/.bin/jest",
     "test": "jest",
-    "jest:watch": "NODE_PATH=src:NODE_PATH jest --watch",
-    "compile": "babel -d build/ src/",
-    "prepublish": "babel -d build/ src/"
+    "jest:watch": "yarn run test --watch",
+    "compile": "./../../node_modules/.bin/babel -d build/ src/",
+    "prepublish": "./../../node_modules/.bin/babel -d build/ src/"
   }
 }
