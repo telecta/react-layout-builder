@@ -63,7 +63,6 @@ describe('FormWithLayout', () => {
         return (
           <FormWithLayout
             {...this.props}
-            ref={c => (this.createdForm = c)}
             onSubmit={this._handleSubmit}
             getFieldProps={this.getFieldProps}
             renderLayout={this.getShortLayout}
