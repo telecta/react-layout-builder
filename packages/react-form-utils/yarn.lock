@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-form-serialize@alvinsj/form-serialize#export-fn:
-  version "0.7.1"
-  resolved "https://codeload.github.com/alvinsj/form-serialize/tar.gz/228e1b738c3297bde5c003817fd371d7385e3c59"
+"@alvinsj/form-serialize@^0.7.2-alpha.1":
+  version "0.7.2-alpha.1"
+  resolved "https://registry.yarnpkg.com/@alvinsj/form-serialize/-/form-serialize-0.7.2-alpha.1.tgz#66a774f38139d067dad498d4e5a48eadf6592afb"
 
 object-assign@^4.x.x:
   version "4.1.1"

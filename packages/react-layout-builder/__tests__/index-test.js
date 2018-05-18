@@ -32,6 +32,7 @@ describe('builder', () => {
   it('section(...)', () => {
     const heading = 'Section 1';
     const el = section(
+      'section-1',
       heading,
       [
         <div key="1" className="row1 col1" />,
@@ -82,6 +83,7 @@ describe('builder', () => {
     it('layout with many sections', () => {
       const heading = 'Section 1';
       const section1 = section(
+        'section-1',
         heading,
         [
           <div key="1" className="row1 col1" />,
@@ -93,6 +95,7 @@ describe('builder', () => {
         ]
       );
       const section2 = section(
+        'section-2',
         <i>hello</i>,
         [
           <div key="2" className="row1 col1" />,
