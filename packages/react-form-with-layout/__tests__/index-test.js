@@ -83,6 +83,7 @@ describe('FormWithLayout', () => {
         return layout(
           section(
             'main',
+            'main',
             [col(3, 'name', 'age'), col(6, 'email')],
             [col(6, 'address[0]', 'address[1]')]
           ),
@@ -93,6 +94,7 @@ describe('FormWithLayout', () => {
             key={'role-husband'}
           />,
           section(
+            'second',
             'main',
             [col(3, 'name', 'age'), col(6, 'email')],
             [col(6, 'address[0]', 'address[1]')]
@@ -105,7 +107,7 @@ describe('FormWithLayout', () => {
         const { layout, section, col } = builder;
 
         return layout(
-          section('husband', [col(6, 'name', 'email')]),
+          section('husband', 'husband', [col(6, 'name', 'email')]),
           <input
             type={'hidden'}
             name={'role'}
@@ -150,10 +152,14 @@ describe('FormWithLayout', () => {
 
     it('renders same number of fields when updated', () => {
       const form = component.find('form');
-      expect(form.find('.field').length).toBe(10);
+      expect(form.find('input[type="text"]').length).toBe(8);
+      expect(form.find('input[type="email"]').length).toBe(2);
+      expect(form.find('input[type="hidden"]').length).toBe(2);
 
       component.update();
-      expect(form.find('.field').length).toBe(10);
+      expect(form.find('input[type="text"]').length).toBe(8);
+      expect(form.find('input[type="email"]').length).toBe(2);
+      expect(form.find('input[type="hidden"]').length).toBe(2);
     });
 
     it('renders 1 layout and 2 sections', () => {
