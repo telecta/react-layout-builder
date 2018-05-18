@@ -2,12 +2,16 @@ jest.unmock('react-form-utils');
 jest.unmock('react-layout-builder');
 jest.unmock('../src');
 
+import 'raf/polyfill';
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormWithLayout from '../src';
 import { inputPropsLookup, formSerialize } from 'react-form-utils';
 
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const FIELDS = {
   age: {
@@ -145,15 +149,15 @@ describe('FormWithLayout', () => {
 
     it('renders two same fields', () => {
       const form = component.find('form');
-      expect(form.find('[name="name"]').length).toBe(2);
+      expect(form.find('input[name="name"]').length).toBe(2);
     });
 
     it('renders same number of fields when updated', () => {
       const form = component.find('form');
-      expect(form.find('.field').length).toBe(10);
+      expect(form.find('input.field').length).toBe(10);
 
       component.update();
-      expect(form.find('.field').length).toBe(10);
+      expect(form.find('input.field').length).toBe(10);
     });
 
     it('renders 1 layout and 2 sections', () => {
@@ -171,13 +175,13 @@ describe('FormWithLayout', () => {
         expect(search.length).toBe(12);
 
         name = n => {
-          return search.at(n).node.getAttribute('name');
+          return search.at(n).instance().getAttribute('name');
         };
         type = n => {
-          return search.at(n).node.getAttribute('type');
+          return search.at(n).instance().getAttribute('type');
         };
         value = n => {
-          return search.at(n).node.value;
+          return search.at(n).instance().value;
         };
       });
 
@@ -255,7 +259,7 @@ describe('FormWithLayout', () => {
       form.simulate('submit');
 
       expect(onSubmit).toBeCalled();
-      expect(grabContext).toBeCalledWith(form.node);
+      expect(grabContext).toBeCalledWith(form.instance());
     });
   });
 });
