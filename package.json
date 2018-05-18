@@ -7,7 +7,7 @@
     "react-dom": "^15.4.x"
   },
   "scripts": {
-    "setup": "yarn && lerna bootstrap",
+    "postinstall": "lerna bootstrap",
     "test": "lerna run test",
     "jest:watch": "jest --watch",
     "format": "./node_modules/.bin/prettier --single-quote --tab-width 2 --write"
