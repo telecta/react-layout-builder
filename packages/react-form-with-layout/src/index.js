@@ -16,7 +16,6 @@ export default class FormWithLayout extends React.Component {
       'props.renderLayout and props.renderField is required.'
     );
 
-    this._refs = {};
     this._isMounted = false;
 
     this.renderField = this.renderField.bind(this);
@@ -45,11 +44,7 @@ export default class FormWithLayout extends React.Component {
         : props.renderLayout(formBuilder, props);
 
     return (
-      <form
-        ref={c => (this.form = c)}
-        {...formProps}
-        className={props.className || 'form-horizontal'}
-      >
+      <form {...formProps} className={props.className || 'form-horizontal'}>
         {children}
         {props.renderButtons ? props.renderButtons(props) : <div />}
       </form>
@@ -77,13 +72,7 @@ export default class FormWithLayout extends React.Component {
 
     var label = def.label ? def.label : humanize(name);
 
-    var refName = this.getFieldRef(name);
-
     const fieldProps = assign({}, def, {
-      ref: c => {
-        this.fields[refName] = c;
-      },
-      // key: refName,
       className: 'field',
       field: def,
       name: name,
@@ -97,18 +86,6 @@ export default class FormWithLayout extends React.Component {
     return def.input
       ? React.createElement(def.input, fieldProps)
       : props.renderField(name, fieldProps);
-  }
-
-  /** contextual features */
-  getFieldRef(name) {
-    var refName = 'field-' + name;
-    var count = this._refs[refName];
-
-    if (!this._isMounted) this._refs[refName] = count ? count + 1 : 1;
-
-    count = this._refs[refName];
-    refName = refName + (count === 1 ? '' : '-' + (this._refs[refName] - 1));
-    return refName;
   }
 }
 

@@ -55,7 +55,7 @@ Argument    | Type        | Example
 
 #### e.g.
 ```js
-// <form ref={f => this.form =f}><input name="message" value="hello"/></form>
+// <form><input name="message" value="hello"/></form>
 
 const values = formSerialize(this.form);
 // { message: 'hello' }
