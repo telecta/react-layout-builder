@@ -1,9 +1,14 @@
 /* eslint no-console: 0 */
 jest.unmock('../src');
 
+import 'raf/polyfill';
 import React from 'react';
 import { layout, section, col } from '../src';
-import { mount } from 'enzyme';
+
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('builder', () => {
   it('{layout, section, col}', () => {
@@ -115,7 +120,12 @@ describe('builder', () => {
 
       const heading = 'Section 1';
       const section1 = layout(
-        section('section-1', heading, [el, another, another, el], [el, another, el]),
+        section(
+          'section-1',
+          heading,
+          [el, another, another, el],
+          [el, another, el]
+        ),
         section('section-2', heading, [el, el, another], [el, another, el])
       );
 

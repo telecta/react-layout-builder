@@ -12,10 +12,7 @@
     "prettier"
   ],
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "sourceType": "module"
   },
   "settings": {
     "react": {
@@ -51,20 +48,6 @@
     "es6": true,
     "browser": true,
     "commonjs": true
-  },
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true,
-    "experimentalObjectRestSpread": true,
-    "templateStrings": true,
-    "superInFunctions": true,
-    "arrowFunctions": true,
-    "forOf": true,
-    "destructuring": true,
-    "defaultParams": true,
-    "classes": true,
-    "blockBindings": true,
-    "binaryLiterals": true
   },
   "globals": {
     "session": true,
