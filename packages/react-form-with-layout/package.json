@@ -1,6 +1,6 @@
 {
   "name": "react-form-with-layout",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A helper to build form layout",
   "main": "build/index.js",
   "author": "code@alvinsj.net",
@@ -25,7 +25,7 @@
     "object-assign": "^4.0.1",
     "object.assign": "^4.0.4",
     "react-form-utils": "^2.0.0",
-    "react-layout-builder": "^2.0.0"
+    "react-layout-builder": "^2.1.0"
   },
   "peerDependencies": {
     "react": "^16.3.x"
