@@ -175,23 +175,12 @@ describe('FormWithLayout', () => {
     });
 
     describe('renders inputs', () => {
-      var name, type, value;
       beforeAll(() => {
         var search = component.find(FormInput);
         expect(search.length).toBe(10);
 
         search = component.find('input');
         expect(search.length).toBe(12);
-
-        name = n => {
-          return search.at(n).props().name;
-        };
-        type = n => {
-          return search.at(n).props().type;
-        };
-        value = n => {
-          return search.at(n).props().value;
-        };
       });
 
       it('renders all inputs', () => {
