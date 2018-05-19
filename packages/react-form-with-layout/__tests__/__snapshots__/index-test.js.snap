@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormWithLayout #create renders inputs renders all inputs 1`] = `
+Array [
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Full name"
+    name="name"
+    type="text"
+>
+    <input
+        name="name"
+        onChange={[Function]}
+        type="text"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="age"
+    name="age"
+    type="text"
+    value={0}
+>
+    <input
+        name="age"
+        onChange={[Function]}
+        type="text"
+        value={0}
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Email add."
+    name="email"
+    type="email"
+>
+    <input
+        name="email"
+        onChange={[Function]}
+        type="email"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Address[0]"
+    name="address[0]"
+    type="text"
+>
+    <input
+        name="address[0]"
+        onChange={[Function]}
+        type="text"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Address[1]"
+    name="address[1]"
+    type="text"
+>
+    <input
+        name="address[1]"
+        onChange={[Function]}
+        type="text"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Full name"
+    name="name"
+    type="text"
+>
+    <input
+        name="name"
+        onChange={[Function]}
+        type="text"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="age"
+    name="age"
+    type="text"
+    value={0}
+>
+    <input
+        name="age"
+        onChange={[Function]}
+        type="text"
+        value={0}
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Email add."
+    name="email"
+    type="email"
+>
+    <input
+        name="email"
+        onChange={[Function]}
+        type="email"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Address[0]"
+    name="address[0]"
+    type="text"
+>
+    <input
+        name="address[0]"
+        onChange={[Function]}
+        type="text"
+    />
+</FormInput>,
+  <FormInput
+    formProps={
+        Object {
+            "getFieldProps": [Function],
+            "onSubmit": [Function],
+            "renderButtons": [Function],
+            "renderExpandedLayout": [Function],
+            "renderField": [Function],
+            "renderLayout": [Function],
+            "showAll": true,
+            "values": Object {
+              "age": 0,
+            },
+          }
+    }
+    label="Address[1]"
+    name="address[1]"
+    type="text"
+>
+    <input
+        name="address[1]"
+        onChange={[Function]}
+        type="text"
+    />
+</FormInput>,
+]
+`;

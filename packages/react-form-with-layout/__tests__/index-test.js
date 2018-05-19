@@ -10,6 +10,7 @@ import { inputPropsLookup, formSerialize } from 'react-form-utils';
 
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import toJSON from 'enzyme-to-json';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -39,7 +40,8 @@ const FormInput = props => {
       className={props.className}
       name={props.name}
       type={props.type}
-      defaultValue={props.defaultValue}
+      value={props.value === null ? undefined : props.value}
+      onChange={jest.fn()}
     />
   );
 };
@@ -47,7 +49,7 @@ FormInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   className: PropTypes.string,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 describe('FormWithLayout', () => {
@@ -140,7 +142,7 @@ describe('FormWithLayout', () => {
       onSubmit: PropTypes.func
     };
 
-    componentProps = { showAll: true, defaultValues: { age: 0 } };
+    componentProps = { showAll: true, values: { age: 0 } };
     component = mount(<FormOwner {...componentProps} />);
   });
 
@@ -182,48 +184,18 @@ describe('FormWithLayout', () => {
         expect(search.length).toBe(12);
 
         name = n => {
-          return search.at(n).instance().getAttribute('name');
+          return search.at(n).props().name;
         };
         type = n => {
-          return search.at(n).instance().getAttribute('type');
+          return search.at(n).props().type;
         };
         value = n => {
-          return search.at(n).instance().value;
+          return search.at(n).props().value;
         };
       });
 
       it('renders all inputs', () => {
-        expect(name(0)).toBe('name');
-        expect(name(1)).toBe('age');
-        expect(name(2)).toBe('email');
-        expect(name(3)).toBe('address[0]');
-        expect(name(4)).toBe('address[1]');
-        expect(name(5)).toBe('role');
-        expect(name(6)).toBe('name');
-        expect(name(7)).toBe('age');
-        expect(name(8)).toBe('email');
-        expect(name(9)).toBe('address[0]');
-        expect(name(10)).toBe('address[1]');
-        expect(name(11)).toBe('role');
-        expect(value(11)).toBe('wife');
-      });
-
-      it('renders input with correct type', () => {
-        expect(name(2)).toBe('email');
-        expect(type(2)).toBe('email');
-      });
-
-      it('renders nodes with value', () => {
-        expect(name(5)).toBe('role');
-        expect(value(5)).toBe('husband');
-
-        expect(name(11)).toBe('role');
-        expect(value(11)).toBe('wife');
-      });
-
-      it('renders input with 0 value', () => {
-        expect(name(7)).toBe('age');
-        expect(value(7)).toBe('0');
+        expect(toJSON(component.find(FormInput))).toMatchSnapshot();
       });
     });
 
@@ -245,7 +217,7 @@ describe('FormWithLayout', () => {
 
     it('submit the form with values', () => {
       const name = 'garfield';
-      component.setProps({ showAll: false, defaultValues: { name: name } });
+      component.setProps({ showAll: false, values: { name: name } });
 
       component.find('form').simulate('submit');
       expect(createActions.mock.calls[0][0]).toEqual({
